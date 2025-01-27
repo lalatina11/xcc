@@ -1,21 +1,30 @@
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200..800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+*, *::before, *::after, :root, html, body{
+  @apply m-0 p-0 box-border antialiased scroll-smooth;
+  font-family: Manrope;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+html{
+  @apply text-[100%] md:text-[90%] lg:text-[100%]
+}
+
+body{
+  @apply bg-zinc-800 text-zinc-300
+}
+
+input, textarea{
+  @apply focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;
+}
+
+.scrollbarHide::-webkit-scrollbar{
+  opacity: 100%;
+}
+
+  .scrollbarHide{
+    scrollbar-width: fit;
   }
-}
-
-body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
-}

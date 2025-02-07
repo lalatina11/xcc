@@ -1,13 +1,15 @@
 import Link from "next/link";
-import { ImCheckmark, ImCross } from "react-icons/im";
-import { RxAvatar } from "react-icons/rx";
+import { CiCalendarDate } from "react-icons/ci";
+import { FaLink } from "react-icons/fa";
+import { FaLocationDot, FaSchool } from "react-icons/fa6";
+import { MdBlock, MdWork } from "react-icons/md";
 
 interface Props {
   userId?: string;
 }
 
-const UserInformationCard = (props:Props) => {
- const {userId} = props
+const UserInformationCard = (props: Props) => {
+  const { userId } = props;
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 text-sm flex flex-col gap-4">
       {/* TOP */}
@@ -17,18 +19,58 @@ const UserInformationCard = (props:Props) => {
           See All
         </Link>
       </div>
-      {/* USER */}
-      <div className="flex justify-between items-center">
-        <div className="flex gap-2 items-center">
-          <RxAvatar className="w-10 h-10 rounded-full object-cover" />
-          <span>Edith Romero</span>
+      {/* Bottom */}
+      <div className="flex flex-col gap-4 text-zinc-400">
+        <div className="flex items-center gap-2">
+          <span className="text-white">Alvin Benson</span>
+          <span className="text-sm">@russell</span>
         </div>
-        <div className="flex gap-3 items-center">
-          <ImCheckmark className="w-5 h-5 object-cover rounded-full ring-2 ring-zinc-300 p-[1px] hover:ring-blue-500 cursor-pointer transition-all ease-in-out duration-200" />
-          <ImCross className="w-5 h-5 object-cover rounded-full ring-2 ring-zinc-300 p-[1px] hover:ring-blue-500 cursor-pointer transition-all ease-in-out duration-200" />
+        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
+        <div className="flex items-center gap-2">
+          <FaLocationDot className="w-[16px] h-[16px]" />
+          <span className="flex gap-2 items-center">
+            Living In<span className="font-semibold">Latvia</span>
+          </span>
         </div>
+        <div className="flex items-center gap-2">
+          <FaSchool className="w-[16px] h-[16px]" />
+          <span className="flex gap-2 items-center">
+            Study At<span className="font-semibold">BSI University</span>
+          </span>
+        </div>
+        <div className="flex items-center gap-2">
+          <MdWork className="w-[16px] h-[16px]" />
+          <span className="flex gap-2 items-center">
+            Works At<span className="font-semibold">Apple Academy</span>
+          </span>
+        </div>
+        <div className="flex items-center justify-between">
+          <div className="flex gap-2 items-center">
+            <FaLink className="w-[16px] h-[16px]" />
+            <Link
+              href={"https://profile-candra.vercel.app"}
+              className="text-xs hover:text-blue-400 transition-all ease-in-out duration-300"
+            >
+              profile-candra.com
+            </Link>
+          </div>
+          <div className="flex gap-2 items-center">
+            <CiCalendarDate className="w-[16px] h-[16px]" />
+            <span className="text-xs flex gap-2 items-center">
+              Joined<span className="font-semibold">9/17/2106</span>
+            </span>
+          </div>
+        </div>
+        <button className="bg-blue-500 p-2 rounded-md text-white font-semibold">
+          Follow
+        </button>
+        <button className="self-end text-red-500 flex gap-2 items-center">
+          <MdBlock />
+          Block User
+        </button>
       </div>
-    </div>  )
-}
+    </div>
+  );
+};
 
-export default UserInformationCard
+export default UserInformationCard;

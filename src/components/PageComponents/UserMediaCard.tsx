@@ -17,14 +17,8 @@ const UserMediaCard = (props: Props) => {
           See All
         </Link>
       </div>
-      {/* USER */}
-      <div className="flex flex-col justify-start items-start">
-        <div className="flex gap-2 items-center">
-          <RxAvatar className="w-10 h-10 rounded-full object-cover" />
-          <span>Edith Romero</span>
-        </div>
-        
-      </div>
+      {/* Bottom */}
+
     </div>
   );
 };

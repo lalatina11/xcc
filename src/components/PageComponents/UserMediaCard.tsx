@@ -1,6 +1,5 @@
+import Image from "next/image";
 import Link from "next/link";
-import { ImCheckmark, ImCross } from "react-icons/im";
-import { RxAvatar } from "react-icons/rx";
 
 interface Props {
   userId?: string;
@@ -18,7 +17,72 @@ const UserMediaCard = (props: Props) => {
         </Link>
       </div>
       {/* Bottom */}
-
+      <div className="flex gap-4 justify-between flex-wrap">
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+        <div className="relative w-1/5 h-24">
+          <Image
+            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
+            fill
+            alt="..."
+            className="rounded-md object-cover"
+          />
+        </div>
+      </div>
     </div>
   );
 };

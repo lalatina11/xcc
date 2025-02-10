@@ -1,10 +1,9 @@
-import AddPost from "@/components/PageComponents/AddPost";
-import CenterMenu from "@/components/PageComponents/CenterMenu";
 import Feed from "@/components/PageComponents/Feed";
 import LeftMenu from "@/components/PageComponents/LeftMenu";
 import RightMenu from "@/components/PageComponents/RightMenu";
-import Stories from "@/components/PageComponents/Stories";
 import { Metadata } from "next";
+import Image from "next/image";
+import { CgProfile } from "react-icons/cg";
 
 export const metadata: Metadata = {
   title: "Sosial | Profile",
@@ -21,11 +20,38 @@ const Page = async ({ params }: { params: { id: string } }) => {
       </div>
       <div className="w-full lg:w-[70%] xl:w-[50%]">
         <div className="flex flex-col gap-6">
-          <Stories />
-          <AddPost />
-          <Feed />
+          <div className="flex flex-col justify-center items-center bg-zinc-950 shadow-md shadow-zinc-600 p-4 rounded-xl">
+            <div className="w-full h-64 relative">
+              <Image
+                src={
+                  "https://img.freepik.com/free-photo/side-view-modern-family-retro-style_23-2150595558.jpg?t=st=1739200188~exp=1739203788~hmac=47246a1d9b7cf74ae0fc4a49feb7eaa7eb4ff5156cd1b259a477949d9ae8a697&w=740"
+                }
+                alt="..."
+                fill
+                className="object-cover rounded-lg"
+              />
+              <CgProfile className="h-32 w-32 rounded-full absolute right-0 left-0 bg-black m-auto -bottom-16 ring-4 ring-white" />
+            </div>
+            <h1 className="mt-20 mb-4 text-2xl font-semibold">Eva Alexander</h1>
+            <div className="flex justify-center items-center gap-12 mb-4 text-sm font-medium">
+              <div className="flex flex-col items-center">
+                <span>213</span>
+                <span>Post</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span>213</span>
+                <span>Followers</span>
+              </div>
+              <div className="flex flex-col items-center">
+                <span>213</span>
+                <span>Following</span>
+              </div>
+            </div>
+          </div>
+          <div className="mt-10">
+            <Feed />
+          </div>
         </div>
-        <CenterMenu />
       </div>
       <div className="hidden lg:block w-[30%]">
         <RightMenu userId={id} />

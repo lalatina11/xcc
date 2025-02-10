@@ -9,7 +9,7 @@ import CommentSection from "./CommentSection";
 
 const Post = () => {
   return (
-    <div className="flex flex-col gap-4 bg-zinc-900 p-4 shadow-md shadow-zinc-600 rounded-lg">
+    <div className="flex flex-col gap-4 bg-zinc-950 p-4 shadow-md shadow-zinc-600 rounded-lg">
       {/* Header Post */}
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">

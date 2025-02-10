@@ -13,11 +13,11 @@ export const metadata: Metadata = {
 
 const Page = async ({ params }: { params: { id: string } }) => {
   const { id } = await params;
-  
+
   return (
     <main className="flex gap-6 pt-6">
       <div className="hidden xl:block w-[20%]">
-        <LeftMenu />
+        <LeftMenu type="profile" />
       </div>
       <div className="w-full lg:w-[70%] xl:w-[50%]">
         <div className="flex flex-col gap-6">

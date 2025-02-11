@@ -1,8 +1,5 @@
-import prisma from "@/libs/prisma";
 import { auth } from "@clerk/nextjs/server";
-import { User } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { FaPoll } from "react-icons/fa";
 import { IoSend } from "react-icons/io5";

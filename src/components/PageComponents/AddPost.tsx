@@ -1,14 +1,21 @@
+import prisma from "@/libs/prisma";
+import { auth } from "@clerk/nextjs/server";
+import { User } from "@prisma/client";
 import Image from "next/image";
 import React from "react";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { FaPoll } from "react-icons/fa";
+import { IoSend } from "react-icons/io5";
 import {
   MdAddPhotoAlternate,
   MdEmojiEmotions,
   MdEventAvailable,
 } from "react-icons/md";
 
-const AddPost = () => {
+const AddPost = async () => {
+  const user = await auth();
+  const userId = await user.userId;
+
   return (
     <div className="flex flex-col gap-2 p-4 bg-zinc-900 shadow-md shadow-zinc-600 w-full rounded-lg">
       <div className="flex gap-4 justify-between text-sm">
@@ -23,13 +30,17 @@ const AddPost = () => {
         {/* POST */}
         <div className="flex-1">
           {/* Text Input */}
-          <div className="flex gap-4">
+          <form action="" className="flex gap-4">
             <textarea
+              name="description"
               placeholder="Type Something..."
               className="bg-zinc-800 rounded-lg flex-1 p-2"
             ></textarea>
             <MdEmojiEmotions className="w-5 h-5 object-cover rounded-full self-end cursor-pointer" />
-          </div>
+            <button type="submit">
+              <IoSend className="h-6 w-6" />
+            </button>
+          </form>
         </div>
       </div>
       {/* Post Option */}

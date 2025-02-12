@@ -12,9 +12,13 @@ const ProfileCard = async () => {
     where: {
       id: userId!,
     },
-    include:{
-      followers:true
-    }
+    include: {
+      _count: {
+        select: {
+          followers: true,
+        },
+      },
+    },
   });
 
   // console.log(user);
@@ -33,7 +37,13 @@ const ProfileCard = async () => {
           className="rounded-md object-cover"
         />
         {user.avatar ? (
-          <Image src={user.avatar!} alt="..." height={48} width={48} className="bg-black absolute -bottom-6 rounded-full w-12 h-12 left-0 right-0 m-auto ring-1 ring-white z-10" />
+          <Image
+            src={user.avatar!}
+            alt="..."
+            height={48}
+            width={48}
+            className="bg-black absolute -bottom-6 rounded-full w-12 h-12 left-0 right-0 m-auto ring-1 ring-white z-10"
+          />
         ) : (
           <CgProfile className="bg-black absolute -bottom-6 rounded-full w-12 h-12 left-0 right-0 m-auto ring-1 ring-white z-10" />
         )}
@@ -46,10 +56,10 @@ const ProfileCard = async () => {
             <CgProfile className="bg-black rounded-full w-3 h-3" />
             <CgProfile className="bg-black rounded-full w-3 h-3" />
           </div>
-          <span>{user.followers.length} Followers</span>
+          <span>{user._count.followers} Followers</span>
         </div>
         <Link
-          href={"/profile/Cora"}
+          href={"/profile/" + user.username}
           className="bg-blue-500 text-white text-xs p-2 rounded-md"
         >
           My Profile

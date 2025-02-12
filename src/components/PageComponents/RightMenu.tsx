@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import Advertisements from "./Advertisements";
 import Birthdays from "./Birthdays";
 import FriendRequest from "./FriendRequest";
@@ -6,16 +7,18 @@ import UserMediaCard from "./UserMediaCard";
 
 interface Props {
   userId?: string;
+  user?: User | null;
 }
 
 const RightMenu = (props: Props) => {
-  const { userId } = props;
+  const { user } = props;
+
   return (
     <div className="flex flex-col gap-6">
-      {userId ? (
+      {user ? (
         <>
-          <UserInformationCard userId={userId} />
-          <UserMediaCard userId={userId}  />
+          <UserInformationCard user={user!} />
+          <UserMediaCard user={user!} />
         </>
       ) : null}
       <FriendRequest />

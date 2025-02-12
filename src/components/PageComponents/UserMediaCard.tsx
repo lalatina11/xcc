@@ -1,8 +1,10 @@
+import { User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
 interface Props {
   userId?: string;
+  user: User | null;
 }
 
 const UserMediaCard = (props: Props) => {

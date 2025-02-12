@@ -1,3 +1,4 @@
+import { User } from "@prisma/client";
 import Link from "next/link";
 import { CiCalendarDate } from "react-icons/ci";
 import { FaLink } from "react-icons/fa";
@@ -6,10 +7,11 @@ import { MdBlock, MdWork } from "react-icons/md";
 
 interface Props {
   userId?: string;
+  user: User | null;
 }
 
 const UserInformationCard = (props: Props) => {
-  const { userId } = props;
+  const { user } = props;
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 text-sm flex flex-col gap-4">
       {/* TOP */}
@@ -22,8 +24,8 @@ const UserInformationCard = (props: Props) => {
       {/* Bottom */}
       <div className="flex flex-col gap-4 text-zinc-400">
         <div className="flex items-center gap-2">
-          <span className="text-white">Alvin Benson</span>
-          <span className="text-sm">@russell</span>
+          <span className="text-white">{user?.username}</span>
+          <span className="text-sm">@{user?.username}</span>
         </div>
         <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
         <div className="flex items-center gap-2">

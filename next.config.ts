@@ -5,7 +5,8 @@ const nextConfig: NextConfig = {
     remotePatterns:[
       {hostname:"profile-candra.vercel.app"},
       {hostname:"img.freepik.com"},
-      {hostname:"www.freepik.com"}
+      {hostname:"www.freepik.com"},
+      {hostname:"img.clerk.com"}
     ]
   }
 };

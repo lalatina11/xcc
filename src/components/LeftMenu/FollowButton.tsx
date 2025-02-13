@@ -1,12 +1,17 @@
-import React from "react";
+"use client";
+interface Props {
+  userId?: string | null | undefined;
+  currentUserId?: string | null | undefined;
+}
 
-const FollowButton = () => {
+const FollowButton = (props: Props) => {
+  const { currentUserId, userId } = props;
   return (
-    <div>
+    <form>
       <button className="bg-blue-500 p-2 rounded-md text-white font-semibold">
         Follow
       </button>
-    </div>
+    </form>
   );
 };
 

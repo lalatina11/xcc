@@ -120,8 +120,12 @@ const UserInformationCard = async (props: Props) => {
             </div>
           ) : null}
         </div>
-        {currentUserId !== user?.id ? <FollowButton /> : null}
-        {currentUserId !== user?.id ? <BlockButton /> : null}
+        {currentUserId !== user?.id ? (
+          <FollowButton userId={user?.id} currentUserId={currentUserId} />
+        ) : null}
+        {currentUserId !== user?.id ? (
+          <BlockButton userId={user?.id} currentUserId={currentUserId} />
+        ) : null}
       </div>
     </div>
   );

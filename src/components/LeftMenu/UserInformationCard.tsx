@@ -6,6 +6,8 @@ import { CiCalendarDate } from "react-icons/ci";
 import { FaLink } from "react-icons/fa";
 import { FaLocationDot, FaSchool } from "react-icons/fa6";
 import { MdBlock, MdWork } from "react-icons/md";
+import BlockButton from "./BlockButton";
+import FollowButton from "./FollowButton";
 
 interface Props {
   userId?: string;
@@ -118,17 +120,8 @@ const UserInformationCard = async (props: Props) => {
             </div>
           ) : null}
         </div>
-        {currentUserId !== user?.id ? (
-          <button className="bg-blue-500 p-2 rounded-md text-white font-semibold">
-            Follow
-          </button>
-        ) : null}
-        {currentUserId !== user?.id ? (
-          <button className="self-end text-red-500 flex gap-2 items-center">
-            <MdBlock />
-            Block User
-          </button>
-        ) : null}
+        {currentUserId !== user?.id ? <FollowButton /> : null}
+        {currentUserId !== user?.id ? <BlockButton /> : null}
       </div>
     </div>
   );

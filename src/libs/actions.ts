@@ -3,7 +3,7 @@
 import { auth } from "@clerk/nextjs/server";
 import prisma from "./prisma";
 
-export const followUser = async (userId: string) => {
+export const followUserAcions = async (userId: string) => {
   const { userId: currentUserId } = await auth();
   if (!currentUserId) {
     throw new Error("User not authenticated");

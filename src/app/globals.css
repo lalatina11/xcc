@@ -13,9 +13,9 @@ html{
   @apply text-[100%] md:text-[90%] lg:text-[100%]
 }
 
-/* body{
+body{
   @apply bg-zinc-800 text-zinc-300
-} */
+}
 
 input, textarea{
   @apply focus:outline-none [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none;

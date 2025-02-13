@@ -1,9 +1,9 @@
-import AddPost from "@/components/PageComponents/AddPost";
-import CenterMenu from "@/components/PageComponents/CenterMenu";
-import Feed from "@/components/PageComponents/Feed";
-import LeftMenu from "@/components/PageComponents/LeftMenu";
-import RightMenu from "@/components/PageComponents/RightMenu";
-import Stories from "@/components/PageComponents/Stories";
+import CenterMenu from "@/components/CenterMenu";
+import AddPost from "@/components/CenterMenu/AddPost";
+import Feed from "@/components/CenterMenu/Feed";
+import Stories from "@/components/CenterMenu/Stories";
+import LeftMenu from "@/components/LeftMenu";
+import RightMenu from "@/components/RightMenu";
 import { Metadata } from "next";
 
 export const metadata: Metadata = {

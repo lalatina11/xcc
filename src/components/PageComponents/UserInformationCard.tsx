@@ -1,3 +1,5 @@
+import prisma from "@/libs/prisma";
+import { auth } from "@clerk/nextjs/server";
 import { User } from "@prisma/client";
 import Link from "next/link";
 import { CiCalendarDate } from "react-icons/ci";
@@ -10,8 +12,51 @@ interface Props {
   user: User | null;
 }
 
-const UserInformationCard = (props: Props) => {
+const UserInformationCard = async (props: Props) => {
   const { user } = props;
+
+  const userJonedAt = new Date(user?.createdAt!).toLocaleDateString("en-US", {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+  });
+
+  const { userId: currentUserId } = await auth();
+
+  let isBlocked = false;
+  let isFollowing = false;
+  let isFollowRequestSent = false;
+
+  if (currentUserId) {
+    const blockRes = await prisma.block.findFirst({
+      where: {
+        blockerId: currentUserId,
+        blockedId: user?.id,
+      },
+    });
+    isBlocked = blockRes ? true : false;
+  }
+
+  if (currentUserId) {
+    const followRes = await prisma.follower.findFirst({
+      where: {
+        followerId: currentUserId,
+        followingId: user?.id,
+      },
+    });
+    isFollowing = followRes ? true : false;
+  }
+
+  if (currentUserId) {
+    const followRequestRes = await prisma.followRequest.findFirst({
+      where: {
+        senderId: currentUserId,
+        receiverId: user?.id,
+      },
+    });
+    isFollowRequestSent = followRequestRes ? true : false;
+  }
+
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 text-sm flex flex-col gap-4">
       {/* TOP */}
@@ -27,49 +72,63 @@ const UserInformationCard = (props: Props) => {
           <span className="text-white">{user?.username}</span>
           <span className="text-sm">@{user?.username}</span>
         </div>
-        <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit.</p>
-        <div className="flex items-center gap-2">
-          <FaLocationDot className="w-[16px] h-[16px]" />
-          <span className="flex gap-2 items-center">
-            Living In<span className="font-semibold">Latvia</span>
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <FaSchool className="w-[16px] h-[16px]" />
-          <span className="flex gap-2 items-center">
-            Study At<span className="font-semibold">BSI University</span>
-          </span>
-        </div>
-        <div className="flex items-center gap-2">
-          <MdWork className="w-[16px] h-[16px]" />
-          <span className="flex gap-2 items-center">
-            Works At<span className="font-semibold">Apple Academy</span>
-          </span>
-        </div>
-        <div className="flex items-center justify-between">
-          <div className="flex gap-2 items-center">
-            <FaLink className="w-[16px] h-[16px]" />
-            <Link
-              href={"https://profile-candra.vercel.app"}
-              className="text-xs hover:text-blue-400 transition-all ease-in-out duration-300"
-            >
-              profile-candra.com
-            </Link>
-          </div>
-          <div className="flex gap-2 items-center">
-            <CiCalendarDate className="w-[16px] h-[16px]" />
-            <span className="text-xs flex gap-2 items-center">
-              Joined<span className="font-semibold">9/17/2106</span>
+        {user?.bio ? <p>{user.bio}</p> : null}
+        {user?.city ? (
+          <div className="flex items-center gap-2">
+            <FaLocationDot className="w-[16px] h-[16px]" />
+            <span className="flex gap-2 items-center">
+              Living In<span className="font-semibold">{user.city}</span>
             </span>
           </div>
+        ) : null}
+        {user?.school ? (
+          <div className="flex items-center gap-2">
+            <FaSchool className="w-[16px] h-[16px]" />
+            <span className="flex gap-2 items-center">
+              Study At<span className="font-semibold">{user.school}</span>
+            </span>
+          </div>
+        ) : null}
+        {user?.work ? (
+          <div className="flex items-center gap-2">
+            <MdWork className="w-[16px] h-[16px]" />
+            <span className="flex gap-2 items-center">
+              Works At<span className="font-semibold">{user.work}</span>
+            </span>
+          </div>
+        ) : null}
+        <div className="flex items-center justify-between">
+          {user?.website ? (
+            <div className="flex gap-2 items-center">
+              <FaLink className="w-[16px] h-[16px]" />
+              <Link
+                href={user.website}
+                className="text-xs hover:text-blue-400 transition-all ease-in-out duration-300"
+              >
+                {user.website}
+              </Link>
+            </div>
+          ) : null}
+          {user?.createdAt ? (
+            <div className="flex gap-2 items-center">
+              <CiCalendarDate className="w-[16px] h-[16px]" />
+              <span className="text-xs flex gap-2 items-center">
+                Joined<span className="font-semibold">{userJonedAt}</span>
+              </span>
+            </div>
+          ) : null}
         </div>
-        <button className="bg-blue-500 p-2 rounded-md text-white font-semibold">
-          Follow
-        </button>
-        <button className="self-end text-red-500 flex gap-2 items-center">
-          <MdBlock />
-          Block User
-        </button>
+        {currentUserId !== user?.id ? (
+          <button className="bg-blue-500 p-2 rounded-md text-white font-semibold">
+            Follow
+          </button>
+        ) : null}
+        {currentUserId !== user?.id ? (
+          <button className="self-end text-red-500 flex gap-2 items-center">
+            <MdBlock />
+            Block User
+          </button>
+        ) : null}
       </div>
     </div>
   );

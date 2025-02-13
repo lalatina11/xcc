@@ -2,9 +2,11 @@ import Feed from "@/components/PageComponents/Feed";
 import LeftMenu from "@/components/PageComponents/LeftMenu";
 import RightMenu from "@/components/PageComponents/RightMenu";
 import prisma from "@/libs/prisma";
+import { auth } from "@clerk/nextjs/server";
 import { User } from "@prisma/client";
 import { Metadata } from "next";
 import Image from "next/image";
+import { notFound } from "next/navigation";
 import { CgProfile } from "react-icons/cg";
 
 export const metadata: Metadata = {
@@ -34,6 +36,28 @@ const Page = async ({ params }: { params: { username: string } }) => {
       },
     },
   });
+
+  if (!user) return notFound();
+
+  const { userId: currentUser } = await auth();
+
+  let isBlocked;
+
+  if (currentUser) {
+    const res = await prisma.block.findFirst({
+      where: {
+        blockerId: currentUser,
+        blockedId: user.id,
+      },
+    });
+    if (res) {
+      isBlocked = true;
+    } else {
+      isBlocked = false;
+    }
+  }
+
+  if (isBlocked) return notFound();
 
   return (
     <main className="flex gap-6 pt-6">

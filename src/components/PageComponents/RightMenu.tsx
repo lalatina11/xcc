@@ -4,6 +4,7 @@ import Birthdays from "./Birthdays";
 import FriendRequest from "./FriendRequest";
 import UserInformationCard from "./UserInformationCard";
 import UserMediaCard from "./UserMediaCard";
+import { Suspense } from "react";
 
 interface Props {
   userId?: string;
@@ -17,8 +18,12 @@ const RightMenu = (props: Props) => {
     <div className="flex flex-col gap-6">
       {user ? (
         <>
-          <UserInformationCard user={user!} />
-          <UserMediaCard user={user!} />
+          <Suspense fallback="Loading...">
+            <UserInformationCard user={user!} />
+          </Suspense>
+          <Suspense fallback="Loading...">
+            <UserMediaCard user={user!} />
+          </Suspense>
         </>
       ) : null}
       <FriendRequest />

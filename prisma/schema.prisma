@@ -1,5 +1,3 @@
-
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,7 +12,7 @@ model User {
   username              String          @unique
   avatar                String?
   cover                 String?
-  name                  String?
+  bio                   String?
   surname               String?
   city                  String?
   school                String?

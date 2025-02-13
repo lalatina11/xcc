@@ -1,5 +1,5 @@
 import Image from "next/image";
-import MoreButton from "./MoreButton";
+import MoreButton from "../MoreButton";
 
 interface Props {
   size?: "sm" | "md" | "lg";

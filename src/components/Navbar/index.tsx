@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import MobileMenu from "../MobileMenu";
+import MobileMenu from "./MobileMenu";
 import { IoIosHome } from "react-icons/io";
 import { FaUserFriends } from "react-icons/fa";
 import { MdWebStories } from "react-icons/md";

@@ -2,8 +2,8 @@ import React from "react";
 import { CgProfile } from "react-icons/cg";
 import { IoSend } from "react-icons/io5";
 import { MdEmojiEmotions } from "react-icons/md";
-import MoreButton from "./MoreButton";
 import { BiSolidLike } from "react-icons/bi";
+import MoreButton from "../MoreButton";
 
 const CommentSection = () => {
   return (

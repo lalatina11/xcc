@@ -4,10 +4,10 @@ import { LiaPhotoVideoSolid } from "react-icons/lia";
 import { LuSquareActivity } from "react-icons/lu";
 import { MdOutlineEventAvailable } from "react-icons/md";
 import { SiMarketo } from "react-icons/si";
-import ProfileCard from "./ProfileCard";
 import { BiSolidVideos } from "react-icons/bi";
 import { FaDiscourse, FaRegListAlt, FaRegNewspaper } from "react-icons/fa";
 import { IoIosSettings } from "react-icons/io";
+import ProfileCard from "./ProfileCard";
 
 interface LeftMenuProps {
   type: "home" | "profile";

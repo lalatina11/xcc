@@ -1,10 +1,11 @@
 import { User } from "@prisma/client";
-import Advertisements from "./Advertisements";
-import Birthdays from "./Birthdays";
-import FriendRequest from "./FriendRequest";
-import UserInformationCard from "./UserInformationCard";
-import UserMediaCard from "./UserMediaCard";
+
 import { Suspense } from "react";
+import UserInformationCard from "../LeftMenu/UserInformationCard";
+import UserMediaCard from "./UserMediaCard";
+import FriendRequest from "./FriendRequest";
+import Birthdays from "./Birthdays";
+import Advertisements from "./Advertisement";
 
 interface Props {
   userId?: string;

@@ -5,6 +5,7 @@ import Stories from "@/components/CenterMenu/Stories";
 import LeftMenu from "@/components/LeftMenu";
 import RightMenu from "@/components/RightMenu";
 import { Metadata } from "next";
+//! Change the metadata
 
 export const metadata: Metadata = {
   title: "Sosial",

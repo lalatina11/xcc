@@ -1,11 +1,11 @@
 "use client";
 import { RxAvatar } from "react-icons/rx";
-import MoreButton from "./MoreButton";
 import Image from "next/image";
 import { BiSolidLike } from "react-icons/bi";
 import { MdInsertComment } from "react-icons/md";
 import { FaShareAlt } from "react-icons/fa";
 import CommentSection from "./CommentSection";
+import MoreButton from "../MoreButton";
 
 const Post = () => {
   return (

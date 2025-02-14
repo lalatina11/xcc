@@ -25,8 +25,6 @@ const UserMediaCard = async (props: Props) => {
     },
   });
 
-  console.log(postWithMedia);
-
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 text-sm flex flex-col gap-4">
       {/* TOP */}

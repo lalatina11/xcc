@@ -57,3 +57,21 @@ export const followUserAcions = async (userId: string) => {
     throw new Error("Something went wrong");
   }
 };
+
+export const blockUserActions = async (userId: string) => {
+  const { userId: currentUserId } = await auth();
+  if (!currentUserId || !userId) {
+    throw new Error("User not authenticated");
+  }
+
+  try {
+    await prisma.block.create({
+      data: {
+        blockerId: currentUserId,
+        blockedId: userId,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+  }
+};

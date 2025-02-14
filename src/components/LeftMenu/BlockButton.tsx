@@ -15,7 +15,7 @@ const BlockButton = (props: Props) => {
     <form className="w-full flex justify-end items-end">
       <button className="self-end text-red-500 flex gap-2 items-center">
         <MdBlock />
-        {isBlocked ? "Unblock" : "Block"}
+        Block
       </button>
     </form>
   );

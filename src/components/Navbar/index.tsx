@@ -23,7 +23,7 @@ const Navbar = () => {
       <nav className="hidden md:flex lg:flex justify-between items-center lg:w-[50%] md:w-full">
         {/* Links */}
         <div className="flex space-x-6 items-center">
-          <Link href={""} className="flex gap-1 items-center">
+          <Link href={"/"} className="flex gap-1 items-center">
             <IoIosHome className="w-[16px] h-[16px]" />
             <span>Home Page</span>
           </Link>

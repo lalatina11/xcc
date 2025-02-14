@@ -2,6 +2,8 @@
 
 import { auth } from "@clerk/nextjs/server";
 import prisma from "./prisma";
+import { redirect } from "next/navigation";
+import { revalidatePath } from "next/cache";
 
 export const followUserAcions = async (userId: string) => {
   const { userId: currentUserId } = await auth();
@@ -71,7 +73,9 @@ export const blockUserActions = async (userId: string) => {
         blockedId: userId,
       },
     });
+    revalidatePath("/");
   } catch (error) {
     console.error(error);
+    throw new Error("Something when wrong")
   }
 };

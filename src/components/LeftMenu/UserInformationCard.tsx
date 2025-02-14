@@ -64,9 +64,15 @@ const UserInformationCard = async (props: Props) => {
       {/* TOP */}
       <div className="flex justify-between items-center font-medium">
         <span className="text-zinc-400">User Information</span>
-        <Link href={"#"} className="text-blue-500 text-xs">
-          See All
-        </Link>
+        {currentUserId === user?.id ? (
+          <div className="text-blue-500 text-xs cursor-pointer">
+            Update Profile
+          </div>
+        ) : (
+          <Link className="text-blue-500 text-xs cursor-pointer" href={"#"}>
+            See All
+          </Link>
+        )}
       </div>
       {/* Bottom */}
       <div className="flex flex-col gap-4 text-zinc-400">

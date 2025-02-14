@@ -38,12 +38,13 @@ const UserMediaCard = async (props: Props) => {
       <div className="flex gap-4 justify-between flex-wrap">
         {postWithMedia.length ? (
           postWithMedia.map((data) => (
-            <div className="relative w-1/5 h-24" key={data.id}>
+            <div className="w-1/5 h-24" key={data.id}>
               <Image
                 src={data.image!}
-                fill
+                width={200}
+                height={200}
                 alt="..."
-                className="rounded-md object-cover"
+                className="rounded-md object-cover w-full h-full"
               />
             </div>
           ))

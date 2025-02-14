@@ -8,6 +8,7 @@ import { FaLocationDot, FaSchool } from "react-icons/fa6";
 import { MdBlock, MdWork } from "react-icons/md";
 import BlockButton from "./BlockButton";
 import FollowButton from "./FollowButton";
+import UpdateUserForm from "../UpdateUserForm";
 
 interface Props {
   userId?: string;
@@ -65,9 +66,7 @@ const UserInformationCard = async (props: Props) => {
       <div className="flex justify-between items-center font-medium">
         <span className="text-zinc-400">User Information</span>
         {currentUserId === user?.id ? (
-          <div className="text-blue-500 text-xs cursor-pointer">
-            Update Profile
-          </div>
+          <UpdateUserForm userId={currentUserId} />
         ) : (
           <Link className="text-blue-500 text-xs cursor-pointer" href={"#"}>
             See All

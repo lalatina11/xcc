@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import Image from "next/image";
+import { ChangeEvent, useState } from "react";
 
 interface Props {
   userId: string;
@@ -8,9 +9,20 @@ interface Props {
 
 const UpdateUserForm = (props: Props) => {
   const [Form, setForm] = useState(false);
+  const [Cover, setCover] = useState<File | null>(null);
+  const [Url, setUrl] = useState<string | null>(null);
 
   const updateProfile = (formData: FormData) => {
-    console.log(Object.fromEntries(formData));
+    // console.log(Object.fromEntries(formData));
+  };
+
+  const handleSetCover = (e: ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      const file = e.target.files[0];
+      setCover(file);
+      const fileUrl = URL.createObjectURL(file);
+      setUrl(fileUrl);
+    }
   };
 
   return (
@@ -55,7 +67,19 @@ const UpdateUserForm = (props: Props) => {
                     name="cover"
                     id="cover"
                     hidden
+                    onChange={handleSetCover}
                   />
+                  {Url ? (
+                    <label htmlFor="cover" className="cursor-pointer">
+                      <Image
+                        src={Url}
+                        alt="..."
+                        width={300}
+                        height={300}
+                        className="w-24 h-10 object-cover rounded-md"
+                      />
+                    </label>
+                  ) : null}
                 </div>
               </div>
               <div className="w-full absolute bottom-3 left-0 flex justify-center items-center">

@@ -1,7 +1,7 @@
 "use client";
 
 import { followUserAcions } from "@/libs/actions";
-import { useState } from "react";
+import { useOptimistic, useState } from "react";
 
 interface Props {
   userId?: string | null | undefined;
@@ -20,6 +20,7 @@ const FollowButton = (props: Props) => {
   });
 
   const follow = async () => {
+    switchOptimisticFollow("");
     try {
       await followUserAcions(userId!);
       setUserState((prev) => ({
@@ -33,12 +34,22 @@ const FollowButton = (props: Props) => {
     }
   };
 
+  const [optimisticFollow, switchOptimisticFollow] = useOptimistic(
+    userState,
+    (state) => ({
+      ...state,
+      following: state.following && false,
+      isFollowingSent:
+        !state.following && !state.isFollowingSent ? true : false,
+    })
+  );
+
   return (
     <form action={follow}>
       <button className="bg-blue-500 p-2 rounded-md text-white font-semibold w-full">
-        {userState.following && userState.isFollowingSent
+        {optimisticFollow.following && optimisticFollow.isFollowingSent
           ? "Unfollow"
-          : userState.isFollowingSent && !userState.following
+          : optimisticFollow.isFollowingSent && !optimisticFollow.following
           ? "Cancel"
           : "Follow"}
       </button>

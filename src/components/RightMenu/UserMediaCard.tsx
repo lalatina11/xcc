@@ -1,4 +1,5 @@
-import { User } from "@prisma/client";
+import prisma from "@/libs/prisma";
+import { Post, User } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -7,8 +8,25 @@ interface Props {
   user: User | null;
 }
 
-const UserMediaCard = (props: Props) => {
-  const { userId } = props;
+const UserMediaCard = async (props: Props) => {
+  const { user } = props;
+  const userId = user?.id;
+
+  const postWithMedia: Post[] = await prisma.post.findMany({
+    where: {
+      userId: userId,
+      image: {
+        not: null,
+      },
+    },
+    take: 8,
+    orderBy: {
+      createdAt: "desc",
+    },
+  });
+
+  console.log(postWithMedia);
+
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 text-sm flex flex-col gap-4">
       {/* TOP */}
@@ -20,70 +38,20 @@ const UserMediaCard = (props: Props) => {
       </div>
       {/* Bottom */}
       <div className="flex gap-4 justify-between flex-wrap">
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
-        <div className="relative w-1/5 h-24">
-          <Image
-            src="https://img.freepik.com/free-photo/brazilian-man-having-guarana-drink-outdoors_23-2150765674.jpg?t=st=1738944055~exp=1738947655~hmac=81f54aa9b56b4d4479c6d17a945db2cc47013b1e77c3d3525a10d36f131b07dc&w=360"
-            fill
-            alt="..."
-            className="rounded-md object-cover"
-          />
-        </div>
+        {postWithMedia.length ? (
+          postWithMedia.map((data) => (
+            <div className="relative w-1/5 h-24" key={data.id}>
+              <Image
+                src={data.image!}
+                fill
+                alt="..."
+                className="rounded-md object-cover"
+              />
+            </div>
+          ))
+        ) : (
+          <>No Media Found</>
+        )}
       </div>
     </div>
   );

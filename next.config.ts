@@ -6,7 +6,8 @@ const nextConfig: NextConfig = {
       {hostname:"profile-candra.vercel.app"},
       {hostname:"img.freepik.com"},
       {hostname:"www.freepik.com"},
-      {hostname:"img.clerk.com"}
+      {hostname:"img.clerk.com"},
+      {hostname:"images.pexels.com"},
     ]
   }
 };

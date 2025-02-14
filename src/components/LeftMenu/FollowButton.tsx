@@ -50,7 +50,7 @@ const FollowButton = (props: Props) => {
         {optimisticFollow.following && optimisticFollow.isFollowingSent
           ? "Unfollow"
           : optimisticFollow.isFollowingSent && !optimisticFollow.following
-          ? "Cancel"
+          ? "Cancel Follow Request"
           : "Follow"}
       </button>
     </form>

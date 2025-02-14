@@ -1,5 +1,6 @@
 "use client";
 
+import { followUserAcions } from "@/libs/actions";
 import { useState } from "react";
 
 interface Props {
@@ -18,8 +19,22 @@ const FollowButton = (props: Props) => {
     isFollowingSent: isFollowingSent,
   });
 
+  const follow = async () => {
+    try {
+      await followUserAcions(userId!);
+      setUserState((prev) => ({
+        ...prev,
+        following: prev.following && false,
+        isFollowingSent:
+          !prev.following && !prev.isFollowingSent ? true : false,
+      }));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
-    <form className="">
+    <form action={follow}>
       <button className="bg-blue-500 p-2 rounded-md text-white font-semibold w-full">
         {userState.following && userState.isFollowingSent
           ? "Unfollow"

@@ -1,6 +1,7 @@
 "use client";
 
 import { blockUserActions } from "@/libs/actions";
+import { useRouter } from "next/navigation";
 import { useOptimistic, useState } from "react";
 import { MdBlock } from "react-icons/md";
 interface Props {
@@ -13,6 +14,7 @@ interface Props {
 
 const BlockButton = (props: Props) => {
   const { userId, isBlocked } = props;
+  const router = useRouter()
 
   const [userState, setuserState] = useState({
     isBlocked: isBlocked,
@@ -23,6 +25,8 @@ const BlockButton = (props: Props) => {
     try {
       await blockUserActions(userId!);
       setuserState((prev) => ({ ...prev, isBlocked: prev.isBlocked && false }));
+      alert("User Blocked Succesfully!")
+      router.replace("/")
     } catch (error) {
       console.error(error);
     }

@@ -4,7 +4,7 @@ import Post from "./Post";
 const Feed = async () => {
   // const feedPost = await prisma.post.findMany({
   //   include: {
-  //    user
+  //     user: { select: { username, avatar, cover } },
   //   },
   //   orderBy: {
   //     createdAt: "desc",
@@ -12,9 +12,7 @@ const Feed = async () => {
   // });
 
   return (
-    <div className="flex flex-col gap-12">
-      {/* <Post post={feedPost} /> */}
-    </div>
+    <div className="flex flex-col gap-12">{/* <Post post={feedPost} /> */}</div>
   );
 };
 

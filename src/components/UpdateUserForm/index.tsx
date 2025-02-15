@@ -9,7 +9,7 @@ interface Props {
 
 const UpdateUserForm = (props: Props) => {
   const [Form, setForm] = useState(false);
-  const [Url, setUrl] = useState<string | null>(null);
+  const [Url, setUrl] = useState<string>("");
 
   const updateProfile = (formData: FormData) => {
     // console.log(Object.fromEntries(formData));

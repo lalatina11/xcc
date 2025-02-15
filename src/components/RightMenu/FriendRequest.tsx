@@ -4,6 +4,7 @@ import Link from "next/link";
 import React from "react";
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { RxAvatar } from "react-icons/rx";
+import FriendRequestAction from "./FriendRequestAction";
 
 const FriendRequest = async () => {
   const { userId: currentUserId } = await auth();
@@ -28,16 +29,7 @@ const FriendRequest = async () => {
       </div>
       {/* USER */}
       {friendRequest.length ? (
-        <div className="flex justify-between items-center">
-          <div className="flex gap-2 items-center">
-            <RxAvatar className="w-10 h-10 rounded-full object-cover" />
-            <span>Edith Romero</span>
-          </div>
-          <div className="flex gap-3 items-center">
-            <ImCheckmark className="w-5 h-5 object-cover rounded-full ring-2 ring-zinc-300 p-[1px] hover:ring-blue-500 cursor-pointer transition-all ease-in-out duration-200" />
-            <ImCross className="w-5 h-5 object-cover rounded-full ring-2 ring-zinc-300 p-[1px] hover:ring-blue-500 cursor-pointer transition-all ease-in-out duration-200" />
-          </div>
-        </div>
+        <FriendRequestAction friendRequest={friendRequest} />
       ) : (
         <p className="text-zinc-400">No Friend Request!</p>
       )}

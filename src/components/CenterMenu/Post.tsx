@@ -6,10 +6,14 @@ import { MdInsertComment } from "react-icons/md";
 import { FaShareAlt } from "react-icons/fa";
 import CommentSection from "./CommentSection";
 import MoreButton from "../MoreButton";
-import { type Post } from "@prisma/client";
+import { User, type Post } from "@prisma/client";
+import Link from "next/link";
 
+interface userFeed extends Post {
+  user: User;
+}
 interface Props {
-  post: Post[];
+  post: userFeed[];
 }
 
 const Post = (props: Props) => {
@@ -22,9 +26,25 @@ const Post = (props: Props) => {
         ? post.map((post) => (
             <div key={post.id}>
               <div className="flex justify-between items-center">
-                <div className="flex items-center gap-4">
-                  <RxAvatar className="w-10 h-10 rounded-full object-cover" />
-                  <span className="font-medium">{post.userId}</span>
+                <div className="flex items-center gap-4 mb-4">
+                  {post.user.avatar ? (
+                    <Link href={`/profile/${post.user.username}`}>
+                      <Image
+                        src={post.user.avatar}
+                        alt="..."
+                        width={400}
+                        height={400}
+                        className="w-10 h-10 rounded-full object-cover hover:ring-2 hover:ring-zinc-500 hover:p-[1.5px] transition-all ease-in-out duration-200"
+                      />
+                    </Link>
+                  ) : (
+                    <Link href={`/profile/${post.user.username}`}>
+                      <RxAvatar className="w-10 h-10 rounded-full object-cover hover:ring-2 hover:ring-zinc-500 hover:p-[1.5px] transition-all ease-in-out duration-200" />
+                    </Link>
+                  )}
+                  <Link href={`/profile/${post.user.username}`}  className="font-medium hover:underline hover:underline-offset-4">
+                    {post.user.username}
+                  </Link>
                 </div>
                 <button>
                   <MoreButton />
@@ -33,19 +53,13 @@ const Post = (props: Props) => {
               <div className="flex flex-col gap-4">
                 <div className="w-full relative min-h-96">
                   <Image
-                    src="https://img.freepik.com/free-photo/full-shot-family-running-meadow_23-2149049202.jpg?t=st=1737972399~exp=1737972999~hmac=3c2bf3981c402122d3a749742fe1ca32fbab3760d763dcf8c21c651029275818"
+                    src={post.image!}
                     alt="..."
                     fill
                     className="w-full h-auto object-cover rounded-lg"
                   />
                 </div>
-                <span>
-                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                  Tempore nemo quisquam quia laboriosam eveniet id et! Odio,
-                  doloremque officiis? Aspernatur porro nobis sapiente
-                  asperiores quam animi repudiandae voluptate consequuntur
-                  dolore.
-                </span>
+                <span>{post.description}</span>
               </div>
               {/* Footer POST */}
               <div className="flex justify-between items-center text-sm my-2">

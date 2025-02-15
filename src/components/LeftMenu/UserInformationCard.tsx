@@ -60,13 +60,17 @@ const UserInformationCard = async (props: Props) => {
     isFollowRequestSent = followRequestRes ? true : false;
   }
 
+  const currentUserData = await prisma.user.findFirst({
+    where:{id:currentUserId!}
+  })
+
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 text-sm flex flex-col gap-4">
       {/* TOP */}
       <div className="flex justify-between items-center font-medium">
         <span className="text-zinc-400">User Information</span>
         {currentUserId === user?.id ? (
-          <UpdateUserForm userId={currentUserId} />
+          <UpdateUserForm user={user} userId={currentUserId} />
         ) : (
           <Link className="text-blue-500 text-xs cursor-pointer" href={"#"}>
             See All

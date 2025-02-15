@@ -1,3 +1,4 @@
+import prisma from "@/libs/prisma";
 import { auth } from "@clerk/nextjs/server";
 import Image from "next/image";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
@@ -8,21 +9,29 @@ import {
   MdEmojiEmotions,
   MdEventAvailable,
 } from "react-icons/md";
+import { RxAvatar } from "react-icons/rx";
 
 const AddPost = async () => {
-  const user = await auth();
-  const userId = await user.userId;
+  const { userId } = await auth();
+
+  const userData = await prisma.user.findFirst({
+    where: { id: userId! },
+  });
 
   return (
     <div className="flex flex-col gap-2 p-4 bg-zinc-900 shadow-md shadow-zinc-600 w-full rounded-lg">
       <div className="flex gap-4 justify-between text-sm">
-        <Image
-          src="https://img.freepik.com/free-photo/fun-party-with-dj_23-2151108197.jpg"
-          alt="..."
-          width={480}
-          height={480}
-          className="w-12 h-12 object-cover rounded-full"
-        />
+        {userData?.avatar ? (
+          <Image
+            src={userData?.avatar!}
+            alt="..."
+            width={480}
+            height={480}
+            className="w-12 h-12 object-cover rounded-full"
+          />
+        ) : (
+          <RxAvatar className="w-12 h-12 object-cover rounded-full" />
+        )}
         {/* Avatar */}
         {/* POST */}
         <div className="flex-1">

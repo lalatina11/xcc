@@ -1,10 +1,12 @@
 "use client";
 
+import { User } from "@prisma/client";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
 
 interface Props {
   userId: string;
+  user: User;
 }
 
 const UpdateUserForm = (props: Props) => {
@@ -68,7 +70,10 @@ const UpdateUserForm = (props: Props) => {
                     onChange={handleSetCover}
                   />
                   {Url ? (
-                    <label htmlFor="cover" className="cursor-pointer">
+                    <label
+                      htmlFor="cover"
+                      className="cursor-pointer flex gap-2 items-center"
+                    >
                       <Image
                         src={Url}
                         alt="..."
@@ -76,8 +81,23 @@ const UpdateUserForm = (props: Props) => {
                         height={300}
                         className="w-24 h-10 object-cover rounded-md"
                       />
+                      <p className="text-xs font-light">Selected Cover</p>
                     </label>
-                  ) : null}
+                  ) : (
+                    <label
+                      htmlFor="cover"
+                      className="cursor-pointer flex gap-2 items-center"
+                    >
+                      <Image
+                        src={props.user.cover!}
+                        alt="..."
+                        width={300}
+                        height={300}
+                        className="w-24 h-10 object-cover rounded-md"
+                      />
+                      <p className="text-xs font-light">Current Cover</p>
+                    </label>
+                  )}
                 </div>
               </div>
               <div className="w-full absolute bottom-3 left-0 flex justify-center items-center">

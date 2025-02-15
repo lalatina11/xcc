@@ -49,7 +49,7 @@ const UserMediaCard = async (props: Props) => {
             </div>
           ))
         ) : (
-          <>No Media Found</>
+          <p className="text-zinc-400">No Media Found</p>
         )}
       </div>
     </div>

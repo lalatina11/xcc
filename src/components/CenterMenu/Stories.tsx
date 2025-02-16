@@ -16,7 +16,7 @@ const Stories = () => {
   };
   return (
     <div
-      className="p-4 bg-zinc-900 rounded-lg shadow-md shadow-zinc-600 overflow-x-auto text-xs scrollbarHide snap-mandatory"
+      className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 overflow-x-auto text-xs scrollbarHide snap-mandatory"
       ref={scrollContainerRef}
       onWheel={handleWheel}
       >

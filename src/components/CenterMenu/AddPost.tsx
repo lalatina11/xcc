@@ -19,7 +19,7 @@ const AddPost = async () => {
   });
 
   return (
-    <div className="flex flex-col gap-2 p-4 bg-zinc-900 shadow-md shadow-zinc-600 w-full rounded-lg">
+    <div className="flex flex-col gap-2 p-4 bg-zinc-950 shadow-md shadow-zinc-600 w-full rounded-lg">
       <div className="flex gap-4 justify-between text-sm">
         {userData?.avatar ? (
           <Image

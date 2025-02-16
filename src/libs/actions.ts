@@ -77,3 +77,72 @@ export const blockUserActions = async (userId: string) => {
     console.error(error);
   }
 };
+
+export const acceptFollowReq = async (userId: string) => {
+  const { userId: currentUserId } = await auth();
+
+  if (!currentUserId) {
+    throw new Error("User not authenticated!");
+  }
+
+  const existingFollowReq = await prisma.followRequest.findFirst({
+    where: {
+      receiverId: currentUserId,
+      senderId: userId,
+    },
+  });
+
+  if (!existingFollowReq) {
+    throw new Error("No Follow Request!");
+  }
+  try {
+    await prisma.followRequest.delete({
+      where: { id: existingFollowReq.id },
+    });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+  try {
+    await prisma.follower.create({
+      data: {
+        followerId: userId,
+        followingId: currentUserId,
+      },
+    });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+
+  revalidatePath("/");
+};
+
+export const declineFollowReq = async (userId: string) => {
+  const { userId: currentUserId } = await auth();
+
+  if (!currentUserId) {
+    throw new Error("User not authenticated!");
+  }
+
+  const existingFollowReq = await prisma.followRequest.findFirst({
+    where: {
+      receiverId: currentUserId,
+      senderId: userId,
+    },
+  });
+
+  if (!existingFollowReq) {
+    throw new Error("No Follow Request!");
+  }
+  try {
+    await prisma.followRequest.delete({
+      where: { id: existingFollowReq.id },
+    });
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
+
+  revalidatePath("/");
+};

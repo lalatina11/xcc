@@ -19,6 +19,19 @@ interface Props {
 const Post = (props: Props) => {
   const { post } = props;
 
+  if (!post)
+    return (
+      <div className="w-full text-center">
+        Pengguna Belum Memiliki Postingan
+      </div>
+    );
+  if (!post.length)
+    return (
+      <div className="w-full text-center">
+        Pengguna Belum Memiliki Postingan
+      </div>
+    );
+
   return (
     <div className="flex flex-col gap-4 bg-zinc-950 p-4 shadow-md shadow-zinc-600 rounded-lg">
       {/* Header Post */}
@@ -42,7 +55,10 @@ const Post = (props: Props) => {
                       <RxAvatar className="w-10 h-10 rounded-full object-cover hover:ring-2 hover:ring-zinc-500 hover:p-[1.5px] transition-all ease-in-out duration-200" />
                     </Link>
                   )}
-                  <Link href={`/profile/${post.user.username}`}  className="font-medium hover:underline hover:underline-offset-4">
+                  <Link
+                    href={`/profile/${post.user.username}`}
+                    className="font-medium hover:underline hover:underline-offset-4"
+                  >
                     {post.user.username}
                   </Link>
                 </div>

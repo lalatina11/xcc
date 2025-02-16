@@ -21,7 +21,7 @@ const Page = () => {
         <div className="flex flex-col gap-6">
           <Stories />
           <AddPost />
-          <Feed />
+          <Feed tipe="home" />
         </div>
         <CenterMenu />
       </div>

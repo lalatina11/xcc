@@ -105,7 +105,7 @@ const Page = async ({ params }: { params: { username: string } }) => {
             </div>
           </div>
           <div className="mt-10">
-            <Feed />
+            <Feed tipe="profile" userId={user.id} />
           </div>
         </div>
       </div>

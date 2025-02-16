@@ -16,31 +16,21 @@ interface Props {
 
 const FriendRequestAction = (props: Props) => {
   const { friendRequest } = props;
-  const [followReqState, setFollowReqState] = useState(friendRequest);
 
   const accept = async (requestId: number, userId: string) => {
-    removeOptimisticReq(requestId);
     try {
       await acceptFollowReq(userId);
-      setFollowReqState((prev) => prev.filter((req) => req.id !== requestId));
     } catch (error) {
       throw error;
     }
   };
   const decline = async (requestId: number, userId: string) => {
-    removeOptimisticReq(requestId);
     try {
       await declineFollowReq(userId);
-      setFollowReqState((prev) => prev.filter((req) => req.id !== requestId));
     } catch (error) {
       throw error;
     }
   };
-
-  const [optimisticFollowReq, removeOptimisticReq] = useOptimistic(
-    followReqState,
-    (prev, value: number) => prev.filter((req) => req.id !== value)
-  );
 
   return (
     <>

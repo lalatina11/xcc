@@ -33,7 +33,7 @@ const Post = (props: Props) => {
     );
 
   return (
-    <div className="flex flex-col gap-4 bg-zinc-950 p-4 shadow-md shadow-zinc-600 rounded-lg">
+    <div className="flex flex-col gap-4 bg-zinc-950 p-4 shadow-md shadow-zinc-600 rounded-lg mb-6">
       {/* Header Post */}
       {post.length
         ? post.map((post) => (

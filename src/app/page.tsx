@@ -23,7 +23,7 @@ const Page = () => {
           <AddPost />
           <Feed tipe="home" />
         </div>
-        <CenterMenu />
+        {/* <CenterMenu /> */}
       </div>
       <div className="hidden lg:block w-[30%]">
         <RightMenu />

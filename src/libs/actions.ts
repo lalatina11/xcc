@@ -13,8 +13,8 @@ export const followUserAcions = async (userId: string) => {
   try {
     const followRes = await prisma.follower.findFirst({
       where: {
-        followerId: currentUserId,
-        followingId: userId,
+        followerId: userId,
+        followingId: currentUserId,
       },
     });
     if (followRes) {
@@ -106,8 +106,8 @@ export const acceptFollowReq = async (userId: string) => {
   try {
     await prisma.follower.create({
       data: {
-        followerId: userId,
-        followingId: currentUserId,
+        followerId: currentUserId,
+        followingId: userId,
       },
     });
   } catch (error) {

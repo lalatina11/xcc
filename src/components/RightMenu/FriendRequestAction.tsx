@@ -2,6 +2,7 @@
 import { acceptFollowReq, declineFollowReq } from "@/libs/actions";
 import { FollowRequest, User } from "@prisma/client";
 import Image from "next/image";
+import Link from "next/link";
 import { useOptimistic, useState } from "react";
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { RxAvatar } from "react-icons/rx";
@@ -48,11 +49,11 @@ const FriendRequestAction = (props: Props) => {
             ) : (
               <RxAvatar className="w-10 h-10 rounded-full object-cover" />
             )}
-            <span>
+            <Link href={`/profile/${data.sender.username}`}>
               {data.sender.name && data.sender.surname
                 ? data.sender.name + " " + data.sender.surname
                 : data.sender.username}
-            </span>
+            </Link>
           </div>
           <div className="flex gap-3 items-center">
             <form action={() => accept(data.id, data.sender.id)}>

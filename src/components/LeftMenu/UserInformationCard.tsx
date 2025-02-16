@@ -43,8 +43,8 @@ const UserInformationCard = async (props: Props) => {
   if (currentUserId) {
     const followRes = await prisma.follower.findFirst({
       where: {
-        followerId: currentUserId,
-        followingId: user?.id,
+        followerId: user?.id,
+        followingId: currentUserId,
       },
     });
     isFollowing = followRes ? true : false;

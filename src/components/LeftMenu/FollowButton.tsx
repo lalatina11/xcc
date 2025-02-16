@@ -47,7 +47,7 @@ const FollowButton = (props: Props) => {
   return (
     <form action={follow}>
       <button className="bg-blue-500 p-2 rounded-md text-white font-semibold w-full">
-        {optimisticFollow.following && optimisticFollow.isFollowingSent
+        {optimisticFollow.following && !optimisticFollow.isFollowingSent
           ? "Unfollow"
           : optimisticFollow.isFollowingSent && !optimisticFollow.following
           ? "Cancel Follow Request"

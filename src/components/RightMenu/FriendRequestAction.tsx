@@ -1,6 +1,7 @@
+"use client";
 import { FollowRequest, User } from "@prisma/client";
 import Image from "next/image";
-import React from "react";
+import { useState } from "react";
 import { ImCheckmark, ImCross } from "react-icons/im";
 import { RxAvatar } from "react-icons/rx";
 
@@ -13,6 +14,7 @@ interface Props {
 }
 
 const FriendRequestAction = (props: Props) => {
+    const [FollowRequest, setFollowRequest] = useState(false)
   const { friendRequest } = props;
   return (
     <>

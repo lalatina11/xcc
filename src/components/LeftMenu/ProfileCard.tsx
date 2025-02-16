@@ -49,7 +49,11 @@ const ProfileCard = async () => {
         )}
       </div>
       <div className="h-20 flex flex-col gap-2 items-center mt-5">
-        <span className="font-semibold">{user.username}</span>
+        <span className="font-semibold">
+          {user?.name && user?.surname
+            ? user?.name + " " + user?.surname
+            : user?.username}
+        </span>
         <div className="flex items-center gap-4">
           <div className="flex">
             <CgProfile className="bg-black rounded-full w-3 h-3" />

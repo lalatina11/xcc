@@ -14,7 +14,7 @@ interface Props {
 }
 
 const FriendRequestAction = (props: Props) => {
-    const [FollowRequest, setFollowRequest] = useState(false)
+  const [FollowRequest, setFollowRequest] = useState(false);
   const { friendRequest } = props;
   return (
     <>
@@ -32,7 +32,11 @@ const FriendRequestAction = (props: Props) => {
             ) : (
               <RxAvatar className="w-10 h-10 rounded-full object-cover" />
             )}
-            <span>{data.sender.username}</span>
+            <span>
+              {data.sender.name && data.sender.surname
+                ? data.sender.name + " " + data.sender.surname
+                : data.sender.username}
+            </span>
           </div>
           <div className="flex gap-3 items-center">
             <form action="">

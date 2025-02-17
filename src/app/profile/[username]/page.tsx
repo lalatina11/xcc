@@ -66,7 +66,7 @@ const Page = async ({ params }: { params: { username: string } }) => {
       </div>
       <div className="w-full lg:w-[70%] xl:w-[50%]">
         <div className="flex flex-col gap-6">
-          <div className="flex flex-col justify-center items-center bg-zinc-950 shadow-md shadow-zinc-600 p-4 rounded-xl">
+          <div className="lg:flex hidden flex-col justify-center items-center bg-zinc-950 shadow-md shadow-zinc-600 p-4 rounded-xl">
             <div className="w-full h-64 relative">
               <Image
                 src={user?.cover!}

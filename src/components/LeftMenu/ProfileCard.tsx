@@ -28,13 +28,14 @@ const ProfileCard = async () => {
   }
 
   return (
-    <div className="p-4 bg-zinc-950 rounded-lg shadow-md text-sm flex flex-col gap-2">
-      <div className="h-20 relative">
+    <div className="p-4 bg-zinc-950 rounded-lg shadow-md text-sm lg:flex flex-col gap-2 hidden md:flex">
+      <div className="h-20">
         <Image
           src={user.cover!}
-          fill
+          width={300}
+          height={300}
           alt="..."
-          className="rounded-md object-cover"
+          className="rounded-md object-cover w-full h-auto"
         />
         {user.avatar ? (
           <Image

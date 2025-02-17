@@ -37,7 +37,7 @@ const Post = (props: Props) => {
       {/* Header Post */}
       {post.length
         ? post.map((post) => (
-            <div key={post.id}>
+            <div key={post.id} id={post.id.toString()}>
               <div className="flex justify-between items-center">
                 <div className="flex items-center gap-4 mb-4">
                   {post.user.avatar ? (
@@ -67,12 +67,13 @@ const Post = (props: Props) => {
                 </button>
               </div>
               <div className="flex flex-col gap-4">
-                <div className="w-full relative min-h-96">
+                <div className="w-full min-h-96">
                   <Image
                     src={post.image!}
                     alt="..."
-                    fill
-                    className="w-full h-auto object-cover rounded-lg"
+                    width={1000}
+                    height={1000}
+                    className="w-full max-h-96 object-cover rounded-lg"
                   />
                 </div>
                 <span>{post.description}</span>

@@ -38,7 +38,11 @@ const UserMediaCard = async (props: Props) => {
       <div className="flex gap-4 justify-between flex-wrap">
         {postWithMedia.length ? (
           postWithMedia.map((data) => (
-            <div className="w-1/5 h-24" key={data.id}>
+            <Link
+              href={`#${data.id}`}
+              className="w-1/5 h-24"
+              key={data.id}
+            >
               <Image
                 src={data.image!}
                 width={200}
@@ -46,7 +50,7 @@ const UserMediaCard = async (props: Props) => {
                 alt="..."
                 className="rounded-md object-cover w-full h-full"
               />
-            </div>
+            </Link>
           ))
         ) : (
           <p className="text-zinc-400">No Media Found</p>

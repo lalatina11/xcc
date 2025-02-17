@@ -25,16 +25,20 @@ const UpdateUserForm = (props: Props) => {
     }
   };
 
+  const handleCloseForm = () => {
+    setForm((prev) => !prev);
+    setUrl("");
+  };
+
   return (
     <div>
-      {!Form ? (
-        <div
-          onClick={() => setForm((prev) => !prev)}
-          className="text-blue-500 text-xs cursor-pointer"
-        >
-          Update Profile
-        </div>
-      ) : (
+      <div
+        onClick={() => setForm((prev) => !prev)}
+        className="text-blue-500 text-xs cursor-pointer"
+      >
+        Update Profile
+      </div>
+      {Form ? (
         <section className="fixed top-0 left-0 w-full h-full bg-zinc-950 bg-opacity-50">
           <div className="w-full h-full flex justify-center items-center">
             <form
@@ -42,16 +46,19 @@ const UpdateUserForm = (props: Props) => {
               className="relative bg-zinc-800 w-1/2 h-2/3 p-6 rounded-md"
             >
               <div
-                className="border border-zinc-300 p-1 px-2 cursor-pointer rounded-md absolute top-2 right-2"
-                onClick={() => setForm((prev) => !prev)}
+                className="ring-1 ring-zinc-500 p-1 px-2 cursor-pointer rounded-md absolute top-2 right-2"
+                onClick={handleCloseForm}
               >
                 X
               </div>
-              <div className="grid grid-cols-2 gap-4">
+              <span className="h-10 flex justify-start items-start text-xl font-semibold">
+                Update your profile
+              </span>
+              <div className="grid grid-cols-2 gap-6 bg-zinc-950 p-4 rounded-lg overflow-y-scroll h-full max-h-[310px] .scrollbarHide2">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name">Sure Name</label>
                   <input
-                    className="ring-1 ring-zinc-300 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
                     name="name"
                     id="name"
@@ -62,11 +69,12 @@ const UpdateUserForm = (props: Props) => {
                     CoverPic
                   </label>
                   <input
-                    className="ring-1 ring-zinc-300 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="file"
                     name="cover"
                     id="cover"
                     hidden
+                    accept="image/*"
                     onChange={handleSetCover}
                   />
                   {Url ? (
@@ -84,20 +92,81 @@ const UpdateUserForm = (props: Props) => {
                       <p className="text-xs font-light">Selected Cover</p>
                     </label>
                   ) : (
-                    <label
-                      htmlFor="cover"
-                      className="cursor-pointer flex gap-2 items-center"
-                    >
-                      <Image
-                        src={props.user.cover!}
-                        alt="..."
-                        width={300}
-                        height={300}
-                        className="w-24 h-10 object-cover rounded-md"
-                      />
+                    <div className="flex flex-col gap-2">
                       <p className="text-xs font-light">Current Cover</p>
-                    </label>
+                      <div className="flex gap-5 items-center">
+                        <label htmlFor="cover" className="cursor-pointer">
+                          <Image
+                            src={props.user.cover!}
+                            alt="..."
+                            width={300}
+                            height={300}
+                            className="w-24 h-10 object-cover rounded-md"
+                          />
+                        </label>
+                        <label
+                          htmlFor="cover"
+                          className="cursor-pointer text-sm font-medium"
+                        >
+                          Change Cover
+                        </label>
+                      </div>
+                    </div>
                   )}
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name">Sure Name</label>
+                  <input
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    type="text"
+                    name="name"
+                    id="name"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name">Sure Name</label>
+                  <input
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    type="text"
+                    name="name"
+                    id="name"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name">Sure Name</label>
+                  <input
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    type="text"
+                    name="name"
+                    id="name"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name">Sure Name</label>
+                  <input
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    type="text"
+                    name="name"
+                    id="name"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name">Sure Name</label>
+                  <input
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    type="text"
+                    name="name"
+                    id="name"
+                  />
+                </div>
+                <div className="flex flex-col gap-2">
+                  <label htmlFor="name">Sure Name</label>
+                  <input
+                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
+                    type="text"
+                    name="name"
+                    id="name"
+                  />
                 </div>
               </div>
               <div className="w-full absolute bottom-3 left-0 flex justify-center items-center">
@@ -108,7 +177,7 @@ const UpdateUserForm = (props: Props) => {
             </form>
           </div>
         </section>
-      )}
+      ) : null}
     </div>
   );
 };

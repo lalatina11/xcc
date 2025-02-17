@@ -9,6 +9,11 @@ import { MdBlock, MdWork } from "react-icons/md";
 import BlockButton from "./BlockButton";
 import FollowButton from "./FollowButton";
 import UpdateUserForm from "../UpdateUserForm";
+import { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Sosial | Profile",
+};
 
 interface Props {
   userId?: string;

@@ -21,19 +21,16 @@ const ProfileCard = async () => {
     },
   });
 
-  // console.log(user);
-
   if (!user) {
     redirect("/sign-in");
   }
 
   return (
-    <div className="p-4 bg-zinc-950 rounded-lg shadow-md text-sm lg:flex flex-col gap-2 hidden md:flex">
-      <div className="h-20">
+    <div className="p-4 bg-zinc-950 rounded-lg shadow-md text-sm lg:flex flex-col gap-2 flex">
+      <div className="h-20 relative">
         <Image
           src={user.cover!}
-          width={300}
-          height={300}
+          fill
           alt="..."
           className="rounded-md object-cover w-full h-auto"
         />
@@ -43,7 +40,7 @@ const ProfileCard = async () => {
             alt="..."
             height={48}
             width={48}
-            className="bg-black absolute -bottom-6 rounded-full w-12 h-12 left-0 right-0 m-auto ring-1 ring-white z-10"
+            className="bg-black absolute -bottom-6 rounded-full w-12 h-12 left-0 right-0 m-auto ring-1 ring-zinc-500 z-10 p-1"
           />
         ) : (
           <CgProfile className="bg-black absolute -bottom-6 rounded-full w-12 h-12 left-0 right-0 m-auto ring-1 ring-white z-10" />

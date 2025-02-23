@@ -65,10 +65,6 @@ const UserInformationCard = async (props: Props) => {
     isFollowRequestSent = followRequestRes ? true : false;
   }
 
-  const currentUserData = await prisma.user.findFirst({
-    where: { id: currentUserId! },
-  });
-
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md shadow-zinc-600 text-sm flex flex-col gap-4">
       {/* TOP */}
@@ -86,8 +82,8 @@ const UserInformationCard = async (props: Props) => {
       <div className="flex flex-col gap-4 text-zinc-400">
         <div className="flex items-center gap-2">
           <span className="text-white">
-            {user?.name && user?.surname
-              ? user.name + " " + user.surname
+            {user?.name && user?.surename
+              ? user?.surename + " " + user?.name
               : user?.username}
           </span>
           <span className="text-sm">@{user?.username}</span>
@@ -117,7 +113,11 @@ const UserInformationCard = async (props: Props) => {
             </span>
           </div>
         ) : null}
-        <div className="flex items-center justify-between">
+        <div
+          className={`flex ${
+            !user?.website ? "items-center justify-between" : "flex-col gap-4"
+          }`}
+        >
           {user?.website ? (
             <div className="flex gap-2 items-center">
               <FaLink className="w-[16px] h-[16px]" />
@@ -130,9 +130,9 @@ const UserInformationCard = async (props: Props) => {
             </div>
           ) : null}
           {user?.createdAt ? (
-            <div className="flex gap-2 items-center">
+            <div className={`flex gap-2 items-center`}>
               <CiCalendarDate className="w-[16px] h-[16px]" />
-              <span className="text-xs flex gap-2 items-center">
+              <span className={`text-xs flex gap-2 items-center`}>
                 Joined<span className="font-semibold">{userJonedAt}</span>
               </span>
             </div>

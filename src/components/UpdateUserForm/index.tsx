@@ -68,7 +68,13 @@ const UpdateUserForm = (props: Props) => {
                   <label className="cursor-pointer" htmlFor="cover">
                     CoverPic
                   </label>
-                  <input type="text" name="cover" id="" hidden defaultValue={Url} />
+                  <input
+                    type="text"
+                    name="cover"
+                    id=""
+                    hidden
+                    defaultValue={Url}
+                  />
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="file"
@@ -170,7 +176,10 @@ const UpdateUserForm = (props: Props) => {
                 </div>
               </div>
               <div className="flex justify-center items-center">
-                <button className="w-[90%] bg-blue-500 p-2 rounded-md">
+                <button
+                  className="w-[90%] bg-blue-500 p-2 rounded-md"
+                  type="submit"
+                >
                   Update Profile
                 </button>
               </div>

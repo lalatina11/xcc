@@ -1,9 +1,6 @@
 import prisma from "@/libs/prisma";
 import { auth } from "@clerk/nextjs/server";
 import Link from "next/link";
-import React from "react";
-import { ImCheckmark, ImCross } from "react-icons/im";
-import { RxAvatar } from "react-icons/rx";
 import FriendRequestAction from "./FriendRequestAction";
 
 const FriendRequest = async () => {

@@ -149,24 +149,41 @@ export const declineFollowReq = async (userId: string) => {
 };
 
 export const updateUser = async (formData: FormData) => {
-  // const { userId } = await auth();
+  const { userId } = await auth();
+
+  if (!userId) {
+    throw new Error("User not Found!");
+    // return "err";
+  }
+
   const data = Object.fromEntries(formData.entries());
   const Profile = z.object({
     cover: z.string().optional(),
     surename: z.string().max(32).optional(),
     name: z.string().max(32).optional(),
     bio: z.string().max(255).optional(),
-    city: z.string().max(255).optional(),
-    school: z.string().max(255).optional(),
-    work: z.string().max(255).optional(),
-    website: z.string().max(255).optional(),
+    city: z.string().max(32).optional(),
+    school: z.string().max(32).optional(),
+    work: z.string().max(32).optional(),
+    website: z.string().max(32).optional(),
   });
 
   const validatedFields = Profile.safeParse(data);
   if (!validatedFields.success) {
     console.log(validatedFields.error.flatten().fieldErrors);
-  } 
-  
-  console.log(validatedFields.data?.cover);
-  
+    throw new Error("err")
+    // return "err";
+  }
+
+  try {
+    await prisma.user.update({
+      where: { id: userId },
+      data: validatedFields.data,
+    });
+    revalidatePath("/");
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+    }
+  }
 };

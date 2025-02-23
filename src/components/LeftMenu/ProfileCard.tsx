@@ -48,8 +48,8 @@ const ProfileCard = async () => {
       </div>
       <div className="h-20 flex flex-col gap-2 items-center mt-5">
         <span className="font-semibold">
-          {user?.name && user?.surname
-            ? user?.name + " " + user?.surname
+          {user?.name && user?.surename
+            ? user?.surename + " " + user?.name
             : user?.username}
         </span>
         <div className="flex items-center gap-4">

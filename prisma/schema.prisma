@@ -13,7 +13,7 @@ model User {
   avatar                String?
   cover                 String?
   bio                   String?
-  surname               String?
+  surename               String?
   name                  String?
   city                  String?
   school                String?

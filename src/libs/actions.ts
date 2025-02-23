@@ -4,6 +4,7 @@ import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import prisma from "./prisma";
 import { z } from "zod";
+import { redirect } from "next/navigation";
 
 export const followUserAcions = async (userId: string) => {
   const { userId: currentUserId } = await auth();
@@ -165,15 +166,16 @@ export const updateUser = async (formData: FormData) => {
     city: z.string().max(32).optional(),
     school: z.string().max(32).optional(),
     work: z.string().max(32).optional(),
-    website: z.string().max(32).optional(),
+    website: z.string().max(128).optional(),
   });
 
   const validatedFields = Profile.safeParse(data);
   if (!validatedFields.success) {
     console.log(validatedFields.error.flatten().fieldErrors);
-    throw new Error("err")
+    throw new Error("err");
     // return "err";
   }
+  const availableUser = await prisma.user.findFirst({where:{id:userId}})
 
   try {
     await prisma.user.update({
@@ -186,4 +188,7 @@ export const updateUser = async (formData: FormData) => {
       console.log(error.message);
     }
   }
+
+  revalidatePath("/");
+  redirect(`/profile/${availableUser?.username}`)
 };

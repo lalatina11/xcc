@@ -3,6 +3,7 @@
 import { auth } from "@clerk/nextjs/server";
 import { revalidatePath } from "next/cache";
 import prisma from "./prisma";
+import { z } from "zod";
 
 export const followUserAcions = async (userId: string) => {
   const { userId: currentUserId } = await auth();
@@ -145,4 +146,27 @@ export const declineFollowReq = async (userId: string) => {
   }
 
   revalidatePath("/");
+};
+
+export const updateUser = async (formData: FormData) => {
+  // const { userId } = await auth();
+  const data = Object.fromEntries(formData.entries());
+  const Profile = z.object({
+    cover: z.string().optional(),
+    surename: z.string().max(32).optional(),
+    name: z.string().max(32).optional(),
+    bio: z.string().max(255).optional(),
+    city: z.string().max(255).optional(),
+    school: z.string().max(255).optional(),
+    work: z.string().max(255).optional(),
+    website: z.string().max(255).optional(),
+  });
+
+  const validatedFields = Profile.safeParse(data);
+  if (!validatedFields.success) {
+    console.log(validatedFields.error.flatten().fieldErrors);
+  } 
+  
+  console.log(validatedFields.data?.cover);
+  
 };

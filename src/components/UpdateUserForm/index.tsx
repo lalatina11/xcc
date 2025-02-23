@@ -1,5 +1,6 @@
 "use client";
 
+import { updateUser } from "@/libs/actions";
 import { User } from "@prisma/client";
 import Image from "next/image";
 import { ChangeEvent, useState } from "react";
@@ -10,13 +11,8 @@ interface Props {
 }
 
 const UpdateUserForm = (props: Props) => {
-  const { user } = props;
   const [Form, setForm] = useState(false);
   const [Url, setUrl] = useState<string>("");
-
-  const updateProfile = (formData: FormData) => {
-    // console.log(Object.fromEntries(formData));
-  };
 
   const handleSetCover = (e: ChangeEvent<HTMLInputElement>) => {
     if (e.target.files) {
@@ -43,7 +39,7 @@ const UpdateUserForm = (props: Props) => {
         <section className="fixed top-0 left-0 w-full h-full bg-zinc-950 bg-opacity-50">
           <div className="w-full h-full flex justify-center items-center">
             <form
-              action={updateProfile}
+              action={updateUser}
               className="relative bg-zinc-800 w-1/2 h-2/3 p-6 rounded-md flex flex-col gap-2"
             >
               <div
@@ -72,10 +68,10 @@ const UpdateUserForm = (props: Props) => {
                   <label className="cursor-pointer" htmlFor="cover">
                     CoverPic
                   </label>
+                  <input type="text" name="cover" id="" hidden defaultValue={Url} />
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="file"
-                    name="cover"
                     id="cover"
                     hidden
                     accept="image/*"

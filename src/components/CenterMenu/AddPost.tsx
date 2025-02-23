@@ -42,6 +42,8 @@ const AddPost = async () => {
               placeholder="Type Something..."
               className="bg-zinc-800 rounded-lg flex-1 p-2"
             ></textarea>
+            <input type="file" accept="image/*" name="image" id="image" hidden />
+            <input type="file" accept="video/*" name="video" id="video" hidden />
             <MdEmojiEmotions className="w-5 h-5 object-cover rounded-full self-end cursor-pointer" />
             <button type="submit">
               <IoSend className="h-6 w-6" />
@@ -51,14 +53,14 @@ const AddPost = async () => {
       </div>
       {/* Post Option */}
       <div className="flex flex-grow items-center gap-6 w-full justify-center">
-        <div className="flex gap-2 items-center cursor-pointer">
+        <label htmlFor="image" className="flex gap-2 items-center cursor-pointer">
           <MdAddPhotoAlternate className="w-4 h-4" />
           Photo
-        </div>
-        <div className="flex gap-2 items-center cursor-pointer">
+        </label>
+        <label htmlFor="video" className="flex gap-2 items-center cursor-pointer">
           <AiOutlineVideoCameraAdd className="w-4 h-4" />
           Video
-        </div>
+        </label>
         <div className="flex gap-2 items-center cursor-pointer">
           <FaPoll className="w-4 h-4" />
           Pool

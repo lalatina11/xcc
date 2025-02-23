@@ -154,10 +154,14 @@ export const updateUser = async (formData: FormData) => {
 
   if (!userId) {
     throw new Error("User not Found!");
-    // return "err";
   }
 
-  const data = Object.fromEntries(formData.entries());
+  const fields = Object.fromEntries(formData);
+
+  const filteredFields = Object.fromEntries(
+    Object.entries(fields).filter(([_, value]) => value !== "")
+  );
+
   const Profile = z.object({
     cover: z.string().optional(),
     surename: z.string().max(32).optional(),
@@ -169,13 +173,13 @@ export const updateUser = async (formData: FormData) => {
     website: z.string().max(128).optional(),
   });
 
-  const validatedFields = Profile.safeParse(data);
+  const validatedFields = Profile.safeParse(filteredFields);
   if (!validatedFields.success) {
     console.log(validatedFields.error.flatten().fieldErrors);
     throw new Error("err");
-    // return "err";
   }
-  const availableUser = await prisma.user.findFirst({where:{id:userId}})
+
+  const availableUser = await prisma.user.findFirst({ where: { id: userId } });
 
   try {
     await prisma.user.update({
@@ -190,5 +194,5 @@ export const updateUser = async (formData: FormData) => {
   }
 
   revalidatePath("/");
-  redirect(`/profile/${availableUser?.username}`)
+  redirect(`/profile/${availableUser?.username}`);
 };

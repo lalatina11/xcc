@@ -43,7 +43,7 @@ const UpdateUserForm = (props: Props) => {
           <div className="w-full h-full flex justify-center items-center">
             <form
               action={updateProfile}
-              className="relative bg-zinc-800 w-1/2 h-2/3 p-6 rounded-md"
+              className="relative bg-zinc-800 w-1/2 h-2/3 p-6 rounded-md flex flex-col gap-2"
             >
               <div
                 className="ring-1 ring-zinc-500 p-1 px-2 cursor-pointer rounded-md absolute top-2 right-2"
@@ -54,6 +54,7 @@ const UpdateUserForm = (props: Props) => {
               <span className="h-10 flex justify-start items-start text-xl font-semibold">
                 Update your profile
               </span>
+              <span className="my-2 text-amber-300">Use the avatar navbar to change your avatar or username!</span>
               <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-full max-h-[310px] px-1.5">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name">Sure Name</label>

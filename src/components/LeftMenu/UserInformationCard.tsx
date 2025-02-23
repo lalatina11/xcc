@@ -113,31 +113,25 @@ const UserInformationCard = async (props: Props) => {
             </span>
           </div>
         ) : null}
-        <div
-          className={`flex ${
-            !user?.website ? "items-center justify-between" : "flex-col gap-4"
-          }`}
-        >
-          {user?.website ? (
-            <div className="flex gap-2 items-center">
-              <FaLink className="w-[16px] h-[16px]" />
-              <Link
-                href={user.website}
-                className="text-xs hover:text-blue-400 transition-all ease-in-out duration-300"
-              >
-                {user.website}
-              </Link>
-            </div>
-          ) : null}
-          {user?.createdAt ? (
-            <div className={`flex gap-2 items-center`}>
-              <CiCalendarDate className="w-[16px] h-[16px]" />
-              <span className={`text-xs flex gap-2 items-center`}>
-                Joined<span className="font-semibold">{userJonedAt}</span>
-              </span>
-            </div>
-          ) : null}
-        </div>
+        {user?.website ? (
+          <div className="flex gap-2 items-center">
+            <FaLink className="w-[16px] h-[16px]" />
+            <Link
+              href={user.website}
+              className="text-xs hover:text-blue-400 transition-all ease-in-out duration-300"
+            >
+              {user.website}
+            </Link>
+          </div>
+        ) : null}
+        {user?.createdAt ? (
+          <div className={`flex gap-2 items-center`}>
+            <CiCalendarDate className="w-[16px] h-[16px]" />
+            <span className={`text-xs flex gap-2 items-center`}>
+              Joined<span className="font-semibold">{userJonedAt}</span>
+            </span>
+          </div>
+        ) : null}
         {currentUserId !== user?.id ? (
           <FollowButton
             userId={user?.id}

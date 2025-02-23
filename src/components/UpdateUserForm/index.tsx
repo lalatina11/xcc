@@ -54,7 +54,7 @@ const UpdateUserForm = (props: Props) => {
               <span className="h-10 flex justify-start items-start text-xl font-semibold">
                 Update your profile
               </span>
-              <div className="grid grid-cols-2 gap-6 bg-zinc-950 p-4 rounded-lg overflow-y-scroll h-full max-h-[310px] .scrollbarHide2">
+              <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-full max-h-[310px] .scrollbarHide2">
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name">Sure Name</label>
                   <input

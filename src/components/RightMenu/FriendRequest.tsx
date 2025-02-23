@@ -23,9 +23,11 @@ const FriendRequest = async () => {
       {/* TOP */}
       <div className="flex justify-between items-center font-medium">
         <span className="text-zinc-400">Friend Request</span>
-        <Link href={"#"} className="text-blue-500 text-xs">
-          See All
-        </Link>
+        {friendRequest.length ? (
+          <Link href={"#"} className="text-blue-500 text-xs">
+            See All
+          </Link>
+        ) : null}
       </div>
       {/* USER */}
       {friendRequest.length ? (

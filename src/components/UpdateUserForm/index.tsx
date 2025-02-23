@@ -10,6 +10,7 @@ interface Props {
 }
 
 const UpdateUserForm = (props: Props) => {
+  const { user } = props;
   const [Form, setForm] = useState(false);
   const [Url, setUrl] = useState<string>("");
 
@@ -54,15 +55,17 @@ const UpdateUserForm = (props: Props) => {
               <span className="h-10 flex justify-start items-start text-xl font-semibold">
                 Update your profile
               </span>
-              <span className="my-2 text-amber-300">Use the avatar navbar to change your avatar or username!</span>
-              <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-full max-h-[310px] px-1.5">
+              <span className="my-2 text-amber-300">
+                Use the avatar navbar to change your avatar or username!
+              </span>
+              <div className="grid grid-cols-2 gap-6 overflow-y-scroll h-full max-h-[310px] px-1.5 pb-3">
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name">Sure Name</label>
+                  <label htmlFor="surename">First Name</label>
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
-                    name="name"
-                    id="name"
+                    name="surename"
+                    id="surename"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
@@ -116,7 +119,7 @@ const UpdateUserForm = (props: Props) => {
                   )}
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name">Sure Name</label>
+                  <label htmlFor="name">Last Name</label>
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
@@ -125,52 +128,52 @@ const UpdateUserForm = (props: Props) => {
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name">Sure Name</label>
+                  <label htmlFor="bio">Bio</label>
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
-                    name="name"
-                    id="name"
+                    name="bio"
+                    id="bio"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name">Sure Name</label>
+                  <label htmlFor="city">City</label>
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
-                    name="name"
-                    id="name"
+                    name="city"
+                    id="city"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name">Sure Name</label>
+                  <label htmlFor="school">School</label>
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
-                    name="name"
-                    id="name"
+                    name="school"
+                    id="school"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name">Sure Name</label>
+                  <label htmlFor="work">Work</label>
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
-                    name="name"
-                    id="name"
+                    name="work"
+                    id="work"
                   />
                 </div>
                 <div className="flex flex-col gap-2">
-                  <label htmlFor="name">Sure Name</label>
+                  <label htmlFor="website">Website</label>
                   <input
                     className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
                     type="text"
-                    name="name"
-                    id="name"
+                    name="website"
+                    id="website"
                   />
                 </div>
               </div>
-              <div className="w-full absolute bottom-3 left-0 flex justify-center items-center">
+              <div className="flex justify-center items-center">
                 <button className="w-[90%] bg-blue-500 p-2 rounded-md">
                   Update Profile
                 </button>

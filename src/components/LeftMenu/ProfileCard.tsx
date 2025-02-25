@@ -27,7 +27,7 @@ const ProfileCard = async () => {
 
   return (
     <div className="p-4 bg-zinc-950 rounded-lg shadow-md text-sm lg:flex flex-col gap-2 flex">
-      <div className="h-20 relative">
+      <Link href={`/user/${user.username}`} className="h-20 relative">
         <Image
           src={user.cover!}
           fill
@@ -45,7 +45,7 @@ const ProfileCard = async () => {
         ) : (
           <CgProfile className="bg-black absolute -bottom-6 rounded-full w-12 h-12 left-0 right-0 m-auto ring-1 ring-white z-10" />
         )}
-      </div>
+      </Link>
       <div className="h-20 flex flex-col gap-2 items-center mt-5">
         <span className="font-semibold">
           {user?.name && user?.surename

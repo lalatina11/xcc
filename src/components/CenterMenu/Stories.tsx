@@ -32,7 +32,7 @@ const Stories = () => {
             alt="..."
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-4   object-cover p-0.5"
           />
           <span className="font-medium">Mathilda</span>
         </div>
@@ -42,7 +42,7 @@ const Stories = () => {
             alt="..."
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-4   object-cover p-0.5"
           />
           <span className="font-medium">Lee</span>
         </div>
@@ -52,7 +52,7 @@ const Stories = () => {
             alt="..."
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-4   object-cover p-0.5"
           />
           <span className="font-medium">Polly</span>
         </div>
@@ -62,7 +62,7 @@ const Stories = () => {
             alt="..."
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-4   object-cover p-0.5"
           />
           <span className="font-medium">Herman</span>
         </div>
@@ -72,7 +72,7 @@ const Stories = () => {
             alt="..."
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-4   object-cover p-0.5"
           />
           <span className="font-medium">Timothy</span>
         </div>
@@ -82,7 +82,7 @@ const Stories = () => {
             alt="..."
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-4   object-cover p-0.5"
           />
           <span className="font-medium">Charles</span>
         </div>
@@ -92,7 +92,7 @@ const Stories = () => {
             alt="..."
             width={80}
             height={80}
-            className="w-20 h-20 rounded-full ring-2 object-cover"
+            className="w-20 h-20 rounded-full ring-4   object-cover p-0.5"
           />
           <span className="font-medium">Jorge</span>
         </div>

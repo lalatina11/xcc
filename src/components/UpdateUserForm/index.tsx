@@ -2,8 +2,9 @@
 
 import { updateUser } from "@/libs/actions";
 import { User } from "@prisma/client";
+import { CldUploadWidget, CloudinaryUploadWidgetResults } from "next-cloudinary";
 import Image from "next/image";
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 
 interface Props {
   userId: string;
@@ -12,19 +13,14 @@ interface Props {
 
 const UpdateUserForm = (props: Props) => {
   const [Form, setForm] = useState(false);
-  const [Url, setUrl] = useState<string>("");
-
-  const handleSetCover = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const file = e.target.files[0];
-      const fileUrl = URL.createObjectURL(file);
-      setUrl(fileUrl);
-    }
-  };
+  const [cover, setCover] = useState<any>(null);
 
   const handleCloseForm = () => {
     setForm((prev) => !prev);
-    setUrl("");
+  };
+
+  const handleOnSuccess = (resutl: CloudinaryUploadWidgetResults) => {
+    setCover(resutl.info);
   };
 
   return (
@@ -39,7 +35,7 @@ const UpdateUserForm = (props: Props) => {
         <section className="fixed top-0 left-0 w-full h-full bg-zinc-950 bg-opacity-50">
           <div className="w-full h-full flex justify-center items-center">
             <form
-              action={updateUser}
+              action={(formData) => updateUser(formData, cover?.secure_url)}
               className="relative bg-zinc-800 w-1/2 h-2/3 p-6 rounded-md flex flex-col gap-2"
             >
               <div
@@ -64,62 +60,34 @@ const UpdateUserForm = (props: Props) => {
                     id="surename"
                   />
                 </div>
-                <div className="flex flex-col gap-2">
-                  <label className="cursor-pointer" htmlFor="cover">
-                    CoverPic
-                  </label>
-                  <input
-                    type="text"
-                    name="cover"
-                    id=""
-                    hidden
-                    defaultValue={Url}
-                  />
-                  <input
-                    className="ring-1 ring-zinc-500 bg-transparent p-1 px-2 rounded-md ring-opacity-50"
-                    type="file"
-                    id="cover"
-                    hidden
-                    accept="image/*"
-                    onChange={handleSetCover}
-                  />
-                  {Url ? (
-                    <label
-                      htmlFor="cover"
-                      className="cursor-pointer flex gap-2 items-center"
-                    >
-                      <Image
-                        src={Url}
-                        alt="..."
-                        width={300}
-                        height={300}
-                        className="w-24 h-10 object-cover rounded-md"
-                      />
-                      <p className="text-xs font-light">Selected Cover</p>
-                    </label>
-                  ) : (
-                    <div className="flex flex-col gap-2">
-                      <p className="text-xs font-light">Current Cover</p>
-                      <div className="flex gap-5 items-center">
-                        <label htmlFor="cover" className="cursor-pointer">
+                <CldUploadWidget
+                  uploadPreset="social"
+                  onSuccess={handleOnSuccess}
+                >
+                  {({ open }) => {
+                    return (
+                      <div
+                        className="flex flex-col gap-2"
+                        onClick={() => open()}
+                      >
+                        <label className="cursor-pointer">CoverPic</label>
+                        <input type="text" id="" hidden />
+                        <div className="flex gap-4 items-center">
                           <Image
                             src={props.user.cover!}
                             alt="..."
-                            width={300}
                             height={300}
-                            className="w-24 h-10 object-cover rounded-md"
+                            width={300}
+                            className="w-16 h-8 object-cover rounded-md cursor-pointer"
                           />
-                        </label>
-                        <label
-                          htmlFor="cover"
-                          className="cursor-pointer text-sm font-medium"
-                        >
-                          Change Cover
-                        </label>
+                          <span className="text-xs font-light cursor-pointer">
+                            Change Cover
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                  )}
-                </div>
+                    );
+                  }}
+                </CldUploadWidget>
                 <div className="flex flex-col gap-2">
                   <label htmlFor="name">Last Name</label>
                   <input

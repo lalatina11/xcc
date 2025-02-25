@@ -149,7 +149,7 @@ export const declineFollowReq = async (userId: string) => {
   revalidatePath("/");
 };
 
-export const updateUser = async (formData: FormData) => {
+export const updateUser = async (formData: FormData, cover: string) => {
   const { userId } = await auth();
 
   if (!userId) {
@@ -173,26 +173,24 @@ export const updateUser = async (formData: FormData) => {
     website: z.string().max(128).optional(),
   });
 
-  const validatedFields = Profile.safeParse(filteredFields);
+  const validatedFields = Profile.safeParse({ cover, ...filteredFields });
   if (!validatedFields.success) {
     console.log(validatedFields.error.flatten().fieldErrors);
     throw new Error("err");
   }
-
-  const availableUser = await prisma.user.findFirst({ where: { id: userId } });
 
   try {
     await prisma.user.update({
       where: { id: userId },
       data: validatedFields.data,
     });
-    revalidatePath("/");
+    // revalidatePath("/");
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
     }
   }
 
-  revalidatePath("/");
-  redirect(`/profile/${availableUser?.username}`);
+  // revalidatePath("/");
+  // redirect(`/profile/${availableUser?.username}`);
 };

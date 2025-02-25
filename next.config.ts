@@ -8,6 +8,7 @@ const nextConfig: NextConfig = {
       {hostname:"www.freepik.com"},
       {hostname:"img.clerk.com"},
       {hostname:"images.pexels.com"},
+      {hostname:"res.cloudinary.com"},
     ]
   }
 };

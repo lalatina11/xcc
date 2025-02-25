@@ -178,19 +178,19 @@ export const updateUser = async (formData: FormData, cover: string) => {
     console.log(validatedFields.error.flatten().fieldErrors);
     throw new Error("err");
   }
-
+const availableUser = await prisma.user.findFirst({where:{id:userId}})
   try {
     await prisma.user.update({
       where: { id: userId },
       data: validatedFields.data,
     });
-    // revalidatePath("/");
+    revalidatePath("/");
   } catch (error) {
     if (error instanceof Error) {
       console.log(error.message);
     }
   }
 
-  // revalidatePath("/");
-  // redirect(`/profile/${availableUser?.username}`);
+  revalidatePath("/");
+  redirect(`/profile/${availableUser?.username}`);
 };

@@ -2,9 +2,14 @@
 
 import { updateUser } from "@/libs/actions";
 import { User } from "@prisma/client";
-import { CldUploadWidget, CloudinaryUploadWidgetResults } from "next-cloudinary";
+import {
+  CldUploadWidget,
+  CloudinaryUploadWidgetResults,
+} from "next-cloudinary";
 import Image from "next/image";
-import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useActionState, useState } from "react";
+import UpdaUserButton from "./updateUserButton";
 
 interface Props {
   userId: string;
@@ -14,9 +19,18 @@ interface Props {
 const UpdateUserForm = (props: Props) => {
   const [Form, setForm] = useState(false);
   const [cover, setCover] = useState<any>(null);
+  const [state, formAction] = useActionState(updateUser, {
+    success: false,
+    error: false,
+  });
+
+  const router = useRouter();
 
   const handleCloseForm = () => {
     setForm((prev) => !prev);
+    router.refresh();
+    state.success = false;
+    state.error = false;
   };
 
   const handleOnSuccess = (resutl: CloudinaryUploadWidgetResults) => {
@@ -35,7 +49,7 @@ const UpdateUserForm = (props: Props) => {
         <section className="fixed top-0 left-0 w-full h-full bg-zinc-950 bg-opacity-50">
           <div className="w-full h-full flex justify-center items-center">
             <form
-              action={(formData) => updateUser(formData, cover?.secure_url)}
+              action={formAction}
               className="relative bg-zinc-800 w-1/2 h-2/3 p-6 rounded-md flex flex-col gap-2"
             >
               <div
@@ -73,6 +87,13 @@ const UpdateUserForm = (props: Props) => {
                         <label className="cursor-pointer">CoverPic</label>
                         <input type="text" id="" hidden />
                         <div className="flex gap-4 items-center">
+                          <input
+                            type="text"
+                            name="cover"
+                            hidden
+                            defaultValue={cover?.secure_url || ""}
+                            id=""
+                          />
                           <Image
                             src={props.user.cover!}
                             alt="..."
@@ -143,13 +164,17 @@ const UpdateUserForm = (props: Props) => {
                   />
                 </div>
               </div>
-              <div className="flex justify-center items-center">
-                <button
-                  className="w-[90%] bg-blue-500 p-2 rounded-md"
-                  type="submit"
-                >
-                  Update Profile
-                </button>
+              <div className="flex flex-col gap-2 justify-center items-center">
+                <UpdaUserButton />
+                {state?.success ? (
+                  <span className="text-xs font-light text-blue-500">
+                    Profile Berhasil diubah!
+                  </span>
+                ) : state?.error ? (
+                  <span className="text-xs font-light text-red-500">
+                    Profile Gagal diubah &#58;&#40;
+                  </span>
+                ) : null}
               </div>
             </form>
           </div>

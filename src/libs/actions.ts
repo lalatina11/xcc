@@ -149,11 +149,14 @@ export const declineFollowReq = async (userId: string) => {
   revalidatePath("/");
 };
 
-export const updateUser = async (formData: FormData, cover: string) => {
+export const updateUser = async (
+  prevState: { success: boolean; error: boolean },
+  formData: FormData
+) => {
   const { userId } = await auth();
 
   if (!userId) {
-    throw new Error("User not Found!");
+    return { success: false, error: true };
   }
 
   const fields = Object.fromEntries(formData);
@@ -173,24 +176,21 @@ export const updateUser = async (formData: FormData, cover: string) => {
     website: z.string().max(128).optional(),
   });
 
-  const validatedFields = Profile.safeParse({ cover, ...filteredFields });
+  const validatedFields = Profile.safeParse(filteredFields);
   if (!validatedFields.success) {
     console.log(validatedFields.error.flatten().fieldErrors);
-    throw new Error("err");
+    return { success: false, error: true };
   }
-const availableUser = await prisma.user.findFirst({where:{id:userId}})
   try {
     await prisma.user.update({
       where: { id: userId },
       data: validatedFields.data,
     });
-    revalidatePath("/");
+    return { success: true, error: false };
   } catch (error) {
     if (error instanceof Error) {
-      console.log(error.message);
+      return { success: false, error: true };
     }
   }
-
-  revalidatePath("/");
-  redirect(`/profile/${availableUser?.username}`);
+  return { success: true, error: false };
 };

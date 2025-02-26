@@ -1,12 +1,10 @@
-import { RxAvatar } from "react-icons/rx";
-import Image from "next/image";
-import { BiSolidLike } from "react-icons/bi";
-import { MdInsertComment } from "react-icons/md";
-import { FaShareAlt } from "react-icons/fa";
-import CommentSection from "./CommentSection";
-import MoreButton from "../MoreButton";
 import { User, type Post } from "@prisma/client";
+import Image from "next/image";
 import Link from "next/link";
+import { RxAvatar } from "react-icons/rx";
+import MoreButton from "../MoreButton";
+import CommentSection from "./CommentSection";
+import FooterPost from "./FooterPost";
 
 interface userFeed extends Post {
   user: User;
@@ -78,31 +76,7 @@ const Post = (props: Props) => {
                 <span>{post.description}</span>
               </div>
               {/* Footer POST */}
-              <div className="flex justify-between items-center text-sm my-2">
-                <div className="flex gap-8">
-                  <div className="flex items-center gap-4 bg-zinc-600 bg-opacity-30 p-2 rounded-md">
-                    <BiSolidLike />
-                    <span className="opacity-30">|</span>
-                    <span className="flex gap-1">
-                      51<span className="hidden md:inline">Likes</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4 bg-zinc-600 bg-opacity-30 p-2 rounded-md">
-                    <MdInsertComment />
-                    <span className="opacity-30">|</span>
-                    <span className="flex gap-1">
-                      51<span className="hidden md:inline">Comments</span>
-                    </span>
-                  </div>
-                  <div className="flex items-center gap-4 bg-zinc-600 bg-opacity-30 p-2 rounded-md">
-                    <FaShareAlt />
-                    <span className="opacity-30">|</span>
-                    <span className="flex gap-1">
-                      51<span className="hidden md:inline">Share</span>
-                    </span>
-                  </div>
-                </div>
-              </div>
+              <FooterPost />
               <hr className="opacity-30" />
               <CommentSection />
             </div>

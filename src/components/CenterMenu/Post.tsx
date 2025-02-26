@@ -1,4 +1,3 @@
-"use client";
 import { RxAvatar } from "react-icons/rx";
 import Image from "next/image";
 import { BiSolidLike } from "react-icons/bi";

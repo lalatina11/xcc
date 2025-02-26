@@ -2,16 +2,18 @@ import prisma from "@/libs/prisma";
 import Post from "./Post";
 
 interface Props {
-  tipe: "home" | "profile";
+  type: "home" | "profile";
   userId?: string;
 }
 
 const Feed = async (props: Props) => {
-  const { userId, tipe } = props;
+  const { userId, type } = props;
 
   const feedPost = await prisma.post.findMany({
     include: {
       user: true,
+      likes: { select: { userId: true } },
+      _count: { select: { comments: true } },
     },
     orderBy: {
       createdAt: "desc",
@@ -19,18 +21,22 @@ const Feed = async (props: Props) => {
   });
 
   const profileFeedPost = await prisma.post.findMany({
-    where: { userId: userId! },
-    include: { user: true },
+    where: { userId: userId },
+    include: {
+      user: true,
+      likes: true,
+      _count: { select: { comments: true } },
+    },
     orderBy: { createdAt: "desc" },
   });
 
   return (
     <div className="flex flex-col gap-12">
-      {tipe === "home" ? (
+      {type === "home" ? (
         <Post post={feedPost} />
-      ) : tipe === "profile" && userId ? (
+      ) : type === "profile" && userId ? (
         <Post post={profileFeedPost} />
-      ) : tipe === "profile" && !userId ? (
+      ) : type === "profile" && !userId ? (
         "Pengguna Belum memiliki Postingan"
       ) : (
         "No Post Found"

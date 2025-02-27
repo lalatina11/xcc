@@ -19,7 +19,7 @@ interface Props {
 const Post = async (props: Props) => {
   const { post } = props;
 
-  const {userId} = await auth()
+  const { userId } = await auth();
 
   if (!post)
     return (
@@ -61,7 +61,9 @@ const Post = async (props: Props) => {
                     href={`/profile/${post.user.username}`}
                     className="font-medium hover:underline hover:underline-offset-4"
                   >
-                    {post.user.username}
+                    {post.user.surename && post.user.name
+                      ? post.user.surename + " " + post.user.name
+                      : post.user.username}
                   </Link>
                 </div>
                 <button>
@@ -82,13 +84,13 @@ const Post = async (props: Props) => {
               </div>
               {/* Footer POST */}
               <FooterPost
-              userIdLoggedIn={userId!}
+                userIdLoggedIn={userId!}
                 postId={post?.id}
                 likes={post?.likes?.map((like) => like.userId)}
                 commentNumber={post?._count?.comments}
               />
               <hr className="opacity-30" />
-              <CommentSection />
+              <CommentSection postId={post.id} userId={userId!} />
             </div>
           ))
         : null}

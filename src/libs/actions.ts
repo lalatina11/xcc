@@ -194,3 +194,26 @@ export const updateUser = async (
   }
   return { success: true, error: false };
 };
+
+export const switchLike = async (postId: number) => {
+  const { userId } = await auth();
+  if (!userId) {
+    throw new Error("user not authentificated");
+  }
+
+  try {
+    const existingLike = await prisma.like.findFirst({
+      where: { postId, userId },
+    });
+    if (existingLike) {
+      await prisma.like.delete({ where: { id: existingLike.id } });
+    } else {
+      await prisma.like.create({ data: { userId, postId } });
+    }
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+};

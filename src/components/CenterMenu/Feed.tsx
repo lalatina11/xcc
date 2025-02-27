@@ -24,7 +24,7 @@ const Feed = async (props: Props) => {
     where: { userId: userId },
     include: {
       user: true,
-      likes: true,
+      likes: { select: { userId: true } },
       _count: { select: { comments: true } },
     },
     orderBy: { createdAt: "desc" },

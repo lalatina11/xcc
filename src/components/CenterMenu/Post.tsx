@@ -1,22 +1,25 @@
-import { Like, User, type Post } from "@prisma/client";
+import { User, type Post } from "@prisma/client";
 import Image from "next/image";
 import Link from "next/link";
 import { RxAvatar } from "react-icons/rx";
 import MoreButton from "../MoreButton";
 import CommentSection from "./CommentSection";
 import FooterPost from "./FooterPost";
+import { auth } from "@clerk/nextjs/server";
 
 export interface userFeed extends Post {
   user: User;
-  likes: {userId:string}[];
+  likes: { userId: string }[];
   _count: { comments: number };
 }
 interface Props {
   post: userFeed[];
 }
 
-const Post = (props: Props) => {
+const Post = async (props: Props) => {
   const { post } = props;
+
+  const {userId} = await auth()
 
   if (!post)
     return (
@@ -79,9 +82,10 @@ const Post = (props: Props) => {
               </div>
               {/* Footer POST */}
               <FooterPost
-                postId={post.id}
-                likes={post.likes}
-                commentNumber={post._count.comments}
+              userIdLoggedIn={userId!}
+                postId={post?.id}
+                likes={post?.likes?.map((like) => like.userId)}
+                commentNumber={post?._count?.comments}
               />
               <hr className="opacity-30" />
               <CommentSection />

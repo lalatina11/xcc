@@ -33,8 +33,8 @@ const UpdateUserForm = (props: Props) => {
     state.error = false;
   };
 
-  const handleOnSuccess = (resutl: CloudinaryUploadWidgetResults) => {
-    setCover(resutl.info);
+  const handleOnSuccess = (result: CloudinaryUploadWidgetResults) => {
+    setCover(result.info);
   };
 
   return (

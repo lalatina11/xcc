@@ -1,5 +1,4 @@
-import prisma from "@/libs/prisma";
-import { auth } from "@clerk/nextjs/server";
+import { User } from "@prisma/client";
 import Image from "next/image";
 import { AiOutlineVideoCameraAdd } from "react-icons/ai";
 import { FaPoll } from "react-icons/fa";
@@ -11,13 +10,12 @@ import {
 } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
 
-const AddPost = async () => {
-  const { userId } = await auth();
+interface Props {
+  userData: User;
+}
 
-  const userData = await prisma.user.findFirst({
-    where: { id: userId! },
-  });
-
+const AddPost = async (props: Props) => {
+  const { userData } = props;
   return (
     <div className="flex flex-col gap-2 p-4 bg-zinc-950 shadow-md shadow-zinc-600 w-full rounded-lg">
       <div className="flex gap-4 justify-between text-sm">
@@ -42,8 +40,20 @@ const AddPost = async () => {
               placeholder="Type Something..."
               className="bg-zinc-800 rounded-lg flex-1 p-2"
             ></textarea>
-            <input type="file" accept="image/*" name="image" id="image" hidden />
-            <input type="file" accept="video/*" name="video" id="video" hidden />
+            <input
+              type="file"
+              accept="image/*"
+              name="image"
+              id="image"
+              hidden
+            />
+            <input
+              type="file"
+              accept="video/*"
+              name="video"
+              id="video"
+              hidden
+            />
             <MdEmojiEmotions className="w-5 h-5 object-cover rounded-full self-end cursor-pointer" />
             <button type="submit">
               <IoSend className="h-6 w-6" />
@@ -53,11 +63,17 @@ const AddPost = async () => {
       </div>
       {/* Post Option */}
       <div className="flex flex-grow items-center gap-6 w-full justify-center">
-        <label htmlFor="image" className="flex gap-2 items-center cursor-pointer">
+        <label
+          htmlFor="image"
+          className="flex gap-2 items-center cursor-pointer"
+        >
           <MdAddPhotoAlternate className="w-4 h-4" />
           Photo
         </label>
-        <label htmlFor="video" className="flex gap-2 items-center cursor-pointer">
+        <label
+          htmlFor="video"
+          className="flex gap-2 items-center cursor-pointer"
+        >
           <AiOutlineVideoCameraAdd className="w-4 h-4" />
           Video
         </label>

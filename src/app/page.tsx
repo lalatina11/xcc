@@ -6,7 +6,6 @@ import RightMenu from "@/components/RightMenu";
 import prisma from "@/libs/prisma";
 import { auth } from "@clerk/nextjs/server";
 import { Metadata } from "next";
-//! Change the metadata
 
 export const metadata: Metadata = {
   title: "Sosial | Home",
@@ -26,7 +25,7 @@ const Page = async () => {
       <div className="w-full lg:w-[70%] xl:w-[50%]">
         <div className="flex flex-col gap-6">
           <Stories />
-          <AddPost userData={userData!} />
+          <AddPost userData={userData} />
           <Feed type="home" />
         </div>
         {/* <CenterMenu /> */}

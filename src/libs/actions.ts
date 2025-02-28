@@ -5,6 +5,7 @@ import { revalidatePath } from "next/cache";
 import prisma from "./prisma";
 import { z } from "zod";
 import { redirect } from "next/navigation";
+import { Post } from "@prisma/client";
 
 export const followUserAcions = async (userId: string) => {
   const { userId: currentUserId } = await auth();
@@ -235,4 +236,27 @@ export const AddComment = async (postId: number, text: string) => {
       throw error;
     }
   }
+};
+
+export const addPostAction = async (formData: FormData) => {
+  const { description, image } = Object.fromEntries(
+    formData.entries()
+  ) as unknown as Post;
+
+  if (!description && !image) return;
+
+  const { userId } = await auth();
+
+  if (!userId) throw new Error("Pengguna tidak ditemukan!");
+
+  try {
+    await prisma.post.create({ data: { userId, description, image } });
+  } catch (error) {
+    if (error instanceof Error) {
+      console.log(error.message);
+      throw error;
+    }
+  }
+
+  redirect("/");
 };
